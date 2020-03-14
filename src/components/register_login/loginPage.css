@@ -1,0 +1,91 @@
+/* .register-user {
+    
+} */
+.register-user strong {
+    display: block;
+    text-align: center;
+    width: 18rem;
+    margin: 2rem auto;
+}
+.register-user h3 {
+    text-align: center;
+    color: rgb(1, 1, 65);
+}
+
+.error {
+    display: block;
+    color: red;
+    font-size: 0.8em;
+}
+
+.form {
+    width: 18rem;
+    margin: 2rem auto;
+}
+.form h3{
+    text-align: center;
+    color: rgb(1, 1, 65);
+    margin: 1rem auto;
+}
+.form input[type=submit] {
+    display: block;
+    width: 5rem;
+    margin: 2rem auto;
+}
+.form input[type=text],.form input[type=password],.form input[type=number]   {
+    border: none;
+    border-bottom: 1px solid rgb(1, 1, 65);
+}
+.fieldset{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.advertiser{
+    background-color: none;
+    border: none;
+    color: rgb(1, 1, 65);
+}
+
+.hr {
+    height: 4px;
+    background-color: rgb(1, 1, 65);
+}
+
+.advertiser-form {
+    margin: 3rem auto;
+}
+
+.back {
+    display: block;
+    width: auto;
+    margin: 2rem auto;
+}
+
+@media screen and (min-width: 800px){
+    .register-user-section{
+        width: 95%;
+        margin: auto;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-around;
+        box-shadow: 0 5px 8px 0 grey;
+    }
+    .hr {
+        display: none;
+    }
+    .register-user h3 {
+        margin: 1rem auto;
+    }
+    .advertiser-article{
+        box-shadow: 0 5px 8px 0 grey;
+        width: 50rem;
+        margin: auto;
+    }
+    .advertiser-forms {
+        display: flex;
+        width: 100%;
+    }
+
+}

@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
+import { Link, withRouter } from 'react-router-dom'
+
 import './header.css'
 
-export default class Header extends Component {
+class Header extends Component {
 
     constructor(props) {
         super(props)
-        // this.state = {
-        //      showNavBar : false
-        // }
         this.warapperRef = React.createRef();
-        this.burgerRef = React.createRef();
+        this.burgerRef   = React.createRef();
+
+        // this.state = {
+        //     firstName: localStorage.getItem('firstName') 
+        // }
     }
     handleClick = () =>{
         const wrapper = this.warapperRef.current
@@ -17,10 +20,27 @@ export default class Header extends Component {
         wrapper.classList.toggle('nav-open')
         burger.classList.toggle('change')
     }
+    logOut = () =>{
+        localStorage.setItem("token", 'logedOut')
+        this.props.history.push({
+            pathname: `/`
+        });  
+    }
     render() {
+
+        let logIn = null
+        if (localStorage.getItem('token') === "logedOut"){
+            logIn = <li><Link to='/register'>Connexion</Link></li>
+        }
+        let logOut = null
+        if (localStorage.getItem('token') !== "logedOut") {
+            logOut = <li onClick={this.logOut}>Deconnexion</li>
+        }
+
+
         return (
             <header className='header'>
-                <h1>Neptune</h1>
+                <h1><Link to='/'>Neptune</Link></h1>
                 <div
                     className='burger-menu'
                     onClick = {this.handleClick}>
@@ -32,14 +52,10 @@ export default class Header extends Component {
                     ref={this.warapperRef}
                     className='navbar'>
                     <ul className = 'navbar-ul'>
+                        {logOut}
+                        {logIn}
                         <li>
-                            Connexion
-                        </li>
-                        <li>
-                            inscription
-                        </li>
-                        <li>
-                            Mon compte
+                            <Link to='/mon_compte'>Mon compte</Link>
                         </li>
                     </ul>
                 </nav>
@@ -47,3 +63,5 @@ export default class Header extends Component {
         )
     }
 }
+
+export default withRouter(Header)

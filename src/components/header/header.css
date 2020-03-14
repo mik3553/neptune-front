@@ -1,8 +1,12 @@
 .header {
-    background-color: rgb(1, 1, 65);
+    background-color: rgba(1, 1, 65, 0.876);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+    left:0;
+    right: 0;
+    z-index: 100;
 }
 .header h1 {
     color: white;
@@ -34,7 +38,7 @@
 .navbar {
     position: fixed;
     top : 3.45rem;
-    background-color: rgba(1, 1, 65, 0.685);
+    background-color: rgba(1, 1, 65, 0.876);
     right: -7rem;
     width: 6.7rem;
     transition: right 0.5s;
@@ -66,10 +70,10 @@
       top : 0;
       right: 0;
       transition: none;
+      background-color: transparent;
     }
     .navbar-ul {
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
     }
 }

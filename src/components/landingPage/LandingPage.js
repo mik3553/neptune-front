@@ -6,22 +6,36 @@ import Filter from './Filter';
 import './landingPage.css'
 
 export default class LandingPage extends Component {
-
     constructor(props) {
         super(props)
     
         this.state = {
-             showFilter:false
+            houses : []
         }
     }
+    componentDidMount(){
+        this.getHouses();
+    }
 
-    showFilter = () =>{
-        this.setState(prevstate => ({
-            showFilter: !prevstate.showFilter,
-        }));
+    getHouses = () => {
+        fetch('http://localhost:4000/houses', {methode : 'GET'})
+        .then(response => {
+            response.json()
+            .then(response =>{
+                console.log(response);
+                this.setState({houses : response})
+            });
+        })
     }
     
+
     render() {
+        const houses = [...this.state.houses]
+            .map(house =>
+                <House 
+                    key={house._id}
+                    details={house}/>
+            )
         return (
             <Fragment>
                 <Header />
@@ -30,10 +44,11 @@ export default class LandingPage extends Component {
                         <input type='text' />
                     </div>
                     <div className='landin-page-sections'>
-                        <section className='landin-page-houses'>
-                            <House />
-                        </section>
+
                         <Filter />
+                        <section className='landin-page-houses'>
+                            {houses}
+                        </section>
                     </div>
                 </main>
                 <Footer />

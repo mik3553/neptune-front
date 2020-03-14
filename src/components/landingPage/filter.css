@@ -1,0 +1,63 @@
+.landin-page-filter fieldset {
+    margin: 1rem;
+    display: flex;
+    color: white;
+}
+.landin-page-filter {
+    z-index: 6;
+    width: 8rem;
+    background-color: rgba(1, 1, 65, 0.876);
+    padding: 1rem;
+    padding-right: 0;
+    position: fixed;
+    left: -8rem;
+    top: 10.5rem;
+    border-bottom-right-radius: 1rem;
+    border-top-right-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: left 0.5s;
+}
+
+.open-filter {
+    left: 0;
+}
+
+.showFilter {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    height: 10rem;
+    background-color: rgba(1, 1, 65, 0.966);
+    
+}
+@media screen and (min-width: 800px){
+
+    .landin-page-filter fieldset {
+       
+        display: flex;
+        color: white;
+    }
+    .landin-page-filter {
+        padding: 0;
+        width: 8rem;
+        height: 25rem;
+        background-color: rgba(1, 1, 65, 0.89);
+        position: sticky;
+        /* left: 0; */
+        top: 0;
+        /* border-bottom-right-radius: 0;
+        border-top-right-radius: 0; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 1rem 1rem 1rem 0;
+        padding-left: 0.5rem;
+    }
+
+    .showFilter {
+        display: none;
+    }
+
+}

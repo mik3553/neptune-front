@@ -1,0 +1,80 @@
+.landin-page h3 {
+    color: white;
+}
+
+.landin-page-bg {
+    
+    background-image: url('../../images/background.jpg');
+    background-size:cover;
+    height: 12rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    /* box-shadow: ; */
+}
+.landin-page-bg input {
+    margin-bottom: 0.5rem;
+    border-radius: 2rem;
+}
+.landin-page fieldset label, .landin-pagefieldset input {
+    width: 1rem;
+}
+
+.landin-page-sections {
+    margin: 3rem 0 3rem 0;
+}
+
+
+@media screen and (min-width: 800px) and (max-width: 1100px){
+
+    .landin-page-bg {
+        height: 22rem;
+    }
+    .landin-page-bg input {
+        margin-bottom: 2rem;
+        width: 15rem;
+    }
+    .landin-page-sections {
+        width: 50rem;
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        box-shadow: 0 5px 8px 0 grey;
+        margin : 3rem auto;
+    }
+    .landin-page-houses {
+       display: flex;
+       flex-wrap: wrap;
+       width: 40rem;
+       /* justify-content: center; */
+    }
+    
+}
+@media screen and (min-width: 1100px){
+    .landin-page-bg {
+        height: 25rem;
+    }
+    .landin-page-bg input {
+        margin-bottom: 2rem;
+        width: 15rem;
+    }
+    .landin-page-sections {
+        display: flex;
+        justify-content: space-between;
+        width: 70rem;
+        margin: 3rem auto;
+        padding: 1rem;
+        box-shadow: 0 5px 8px 0 grey;
+    }
+    .landin-page-houses {
+       display: flex;
+       flex-wrap: wrap;
+       width: 60rem;
+       /* justify-content: center; */
+    }
+    
+}
+
+
+
+
