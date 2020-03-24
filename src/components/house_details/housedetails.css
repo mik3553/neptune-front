@@ -1,0 +1,103 @@
+.house-details-page {
+    /* border: 1px solid rgb(1, 1, 65); */
+    width: 20rem;
+    margin: 1rem auto;
+    box-shadow: 0 5px 8px 0 grey;
+}
+.localisation {
+    margin: 0.5rem;
+    border: 1px solid rgba(1, 1, 65, 0.876);
+    padding: 0.5rem;
+}
+.house-details-page-service h2, figcaption {
+    text-align: center;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+}
+.house-details-page-service p {
+   margin: 0.5rem 0;
+}
+.house-details-page-service li, .houseInformations li {
+   list-style: inside;
+}
+
+.house-details-page-service {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0.5rem ;
+    padding-bottom: 1rem;
+}
+.house-details-page-service button {
+    margin: 0.5rem auto auto auto;
+    width: 4.5rem;
+    height: 1.5rem;
+    display: block;
+}
+.house-details-page-service span {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+}
+.house-details-page-service ul {
+  margin-left: 1rem;
+}
+.house-details-page-service img {
+    display: block;
+    width: 3rem;
+    margin: 0.5rem auto 0 auto;
+    transition: width 0.5s;
+}
+.house-details-page-service img:hover {
+    width: 3.5rem;
+}
+
+.comments {
+    width: 95%;
+    margin: 1rem auto;
+}
+.comment-details {
+    border: 1px solid rgba(1, 1, 65, 0.876);
+    margin: 1rem auto;
+}
+.comment-details span{
+    display: block;
+    padding: 0.5rem;
+    background-color: rgba(1, 1, 65, 0.15);
+    border-bottom: 1px solid rgba(1, 1, 65, 0.041);
+}
+.comment-details p{
+    padding: 0.5rem;
+}
+
+.addComment {
+    text-align: center;
+    padding: 1rem;
+}
+.addComment textarea  {
+    display: block;
+    margin: 0.5rem auto;
+    height: 5rem;
+    width: 100%;
+}
+.plus {
+    display: block;
+    height: 1rem;
+}
+
+@media screen and (min-width: 800px){
+ 
+    .house-details-page {
+        width: 45rem;
+        margin: 1rem auto;
+    }
+ 
+}
+/* @media screen and (min-width: 1100px){
+
+    .house {
+        width: 18rem;
+        margin: 1rem auto;
+    }
+} */

@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 
 import './house.css'
 
-export default class House extends Component {
+class House extends Component {
+   
+    handleClick = (event) =>{
+        event.preventDefault()
+        this.props.history.push({
+            pathname: `/house_details/${this.props.details._id}`,
+        })
+    }
     render() {
 
         const {details} = this.props;
@@ -18,12 +26,12 @@ export default class House extends Component {
             }
         }
         const images = details.images
-            .map(item =>
-                <div
-                    className='image-slide'
-                    key={item}
-                    data-src={requireImage(item)} />
-                )
+        .map(item =>
+            <div
+                className='image-slide'
+                key={item}
+                data-src={requireImage(item)} />
+        )
 
         return (
             <figure className='house'>
@@ -37,7 +45,7 @@ export default class House extends Component {
                     <div>
                         <p>nombre de chambes{details.nbrOfRooms}</p>
                         <p>nombre de lits{details.nbrOfBeds}</p>
-                        <p>nombre de personnes{details.nbrOfPersons}</p>
+                        {/* <p>nombre de personnes{details.nbrOfPersons}</p> */}
                         <span>Note : {details.rating}/5</span>
                     </div>
                     <div>
@@ -53,3 +61,5 @@ export default class House extends Component {
         )
     }
 }
+
+export default withRouter(House)

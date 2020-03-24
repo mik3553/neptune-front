@@ -25,6 +25,7 @@ export default class RegisterForm extends Component {
             breakfast: false,
             landry: false,
             animals: false,
+            wi_fi : false,
             nameError : false,
             passwordError : false,
             emailError: false,
@@ -60,6 +61,7 @@ export default class RegisterForm extends Component {
             formData.append('price', this.state.price)
             formData.append('breakfast', this.state.breakfast)
             formData.append('landry', this.state.landry)
+            formData.append('wi_fi', this.state.wi_fi)
             formData.append('animals', this.state.animals)
             let options = {
                 method: 'POST',
@@ -311,6 +313,15 @@ export default class RegisterForm extends Component {
                                     type='checkbox'
                                     name='animals'
                                     value = {this.state.animals}
+                                    onClick={this.checkBoxes}
+                                    />
+                            </div>
+                            <div className='checkboxes'>
+                                <label>Wi-fi :</label>
+                                <input
+                                    type='checkbox'
+                                    name='wi_fi'
+                                    value = {this.state.wi_fi}
                                     onClick={this.checkBoxes}
                                     />
                             </div>

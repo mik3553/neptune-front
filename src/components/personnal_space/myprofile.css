@@ -1,0 +1,101 @@
+.myprofile img {
+    display: block;
+    width: 14rem;
+    margin: 1rem 0.5rem;
+}
+.myprofile  {
+    width: 90%;
+    margin: 2rem auto;
+}
+.myprofile article {
+    margin: 2rem auto;
+    box-shadow: 0 5px 8px 0 grey;
+    padding: 0.5rem;
+}
+.myprofile p {
+    margin: 0.5rem auto;
+    
+}
+.myprofile span {
+    font-weight: 800;
+    margin-right: 0.5rem;
+}
+.myprofile li {
+    margin: 0.5rem auto;
+}
+.myprofile button {
+    /* margin-left: 1rem; */
+    display: block;
+    width: 5rem;
+    margin: 1rem auto;
+}
+.whishlist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.4s;
+}
+.whishlist button {
+   height: 2rem;
+}
+.displayWish {
+    display: none;
+}
+
+/* .myprofile textarea {
+    display: block;
+} */
+/* .houseInformations-toModify form{
+    width: 15rem;
+    margin: auto;
+} */
+.houseInformations-toModify fieldset{
+    display: flex;
+    
+    margin: 0.5rem 0;
+}
+/* .button-modify {
+    display: block;
+    width: 5rem;
+    margin: 1rem auto;
+} */
+
+@media screen and (min-width: 800px){
+    .myprofile {
+        box-shadow: 0 5px 8px 0 grey;
+        width: 35rem;
+    }
+    .myprofile article {
+        width: 30rem;
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+    .myprofile div {
+        margin: 2rem auto;
+    }
+    .houseInformations-images {
+        display: flex ;
+        flex-wrap: wrap;
+    }
+}
+@media screen and (min-width: 1100px){
+    .myprofile {
+        display: flex;
+        justify-content: space-between;
+        width: 70rem;
+        margin: 3rem auto;
+        padding: 1rem;
+        box-shadow: 0 5px 8px 0 grey;
+    }
+    .myprofile article {
+        width: 30rem;
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+    .myprofile div {
+        margin: 2rem auto;
+    }
+}
+
+
+/* .personalInformations */

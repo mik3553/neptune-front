@@ -31,9 +31,13 @@ class LoginForm extends Component {
                 if(response.status === 200){
                     response.json()
                     .then(response =>{
-                        console.log(response)
-                        localStorage.setItem('token', response.token)
-                        // localStorage.setItem('firstName', response.user_loged)
+                        console.log(response);
+                        localStorage.setItem('token', response.token);
+                        setTimeout(() => {
+                           localStorage.removeItem('token');
+                        },  1000 * 60 * 60);
+
+                        localStorage.setItem('firstName', response.user_loged)
                         this.props.history.push({
                             pathname: `/`
                         });

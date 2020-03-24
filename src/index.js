@@ -6,6 +6,7 @@ import './App.css'
 import LandingPage from './components/landingPage/LandingPage'
 import LoginPage from './components/register_login/LoginPage'
 import HouseDetails from './components/house_details/HouseDetails'
+import MyProfile from './components/personnal_space/MyProfile';
 import * as serviceWorker from './serviceWorker';
 
 const Routes = () => {
@@ -14,7 +15,8 @@ const Routes = () => {
                 <Switch>
                     <Route exact path='/' component={LandingPage} />
                     <Route path='/register' component={LoginPage} />
-                    <Route path='/house_details' component={HouseDetails} />
+                    <Route path='/mon_compte' component={MyProfile} />
+                    <Route path='/house_details/:id' component={HouseDetails} />
                 </Switch>
             </BrowserRouter>
         )

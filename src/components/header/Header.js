@@ -21,7 +21,7 @@ class Header extends Component {
         burger.classList.toggle('change')
     }
     logOut = () =>{
-        localStorage.setItem("token", 'logedOut')
+        localStorage.removeItem("token")
         this.props.history.push({
             pathname: `/`
         });  
@@ -29,14 +29,13 @@ class Header extends Component {
     render() {
 
         let logIn = null
-        if (localStorage.getItem('token') === "logedOut"){
+        if (localStorage.getItem('token') === null){
             logIn = <li><Link to='/register'>Connexion</Link></li>
         }
         let logOut = null
-        if (localStorage.getItem('token') !== "logedOut") {
+        if (localStorage.getItem('token') !== null) {
             logOut = <li onClick={this.logOut}>Deconnexion</li>
         }
-
 
         return (
             <header className='header'>

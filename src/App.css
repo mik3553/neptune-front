@@ -54,3 +54,15 @@ a {
 a:hover {
 	color: grey;
 }
+
+h2 {
+	font-size: 1.2em;
+	text-align: center;
+	margin: 1rem auto;
+	font-weight: 900;
+}
+h3 {
+	font-size: 1.2em;
+	text-align: center;
+	margin: 1rem auto;
+}
