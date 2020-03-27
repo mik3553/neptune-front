@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-export default function DeleteWish({itemToDelete, deleted}) {
+export default function DeleteWish({wish_id, deleted}) {
 
     const deleteWhish = async () => {
         let options = {
             method: 'PUT',
             body: new URLSearchParams({
-                _id: itemToDelete
+                _id: wish_id
             }),
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded',

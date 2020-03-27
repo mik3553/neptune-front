@@ -2,9 +2,10 @@ import React, { Component, Fragment } from 'react'
 import Header from '../header/Header'
 import Footer from '../footer/Footer'
 import AwesomeSlider from 'react-awesome-slider';
-import './housedetails.css'
 import Comments from './Comments';
 import AddComment from './AddComment';
+
+import './housedetails.css'
 
 export default class HouseDetails extends Component {
 
@@ -13,7 +14,7 @@ export default class HouseDetails extends Component {
         this.state = {
             details : {},
             images : [],
-            services : {},
+            services : [],
         }
     }
     
@@ -36,9 +37,10 @@ export default class HouseDetails extends Component {
             details : jsonData,
             images : dataImage,
             services: dataServices,
+            noUser : false
         })
     }
-    addTowhishList = async (event) => {
+    addTowhishList = async () => {
         const options = {
             method: 'POST',
             body : new URLSearchParams({
@@ -50,8 +52,15 @@ export default class HouseDetails extends Component {
             }
         };
         const response = await fetch(`http://localhost:4000/whishList`, options);
-        const jsonData = await response.json();
-        console.log(jsonData)
+        if(response.ok){
+            const jsonData = await response.json();
+            // console.log(jsonData)
+        }
+        if(response.status === 403){
+            this.setState({
+                noUser : true
+            })
+        }
     }
     
     render() {
@@ -69,7 +78,17 @@ export default class HouseDetails extends Component {
                         key={photo}
                         data-src={`http://localhost:4000/${photo}`} />
                 )
-            const services = {...this.state.services}
+            const services = [...this.state.services]
+            .map(service => (
+                <ul
+                    key={service._id}
+                >
+                    {service.breakfast ? <li>Repas</li> : null}
+                    {service.landry ? <li>Blanchisserie</li> : null}
+                    {service.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
+                    {service.wi_fi ? <li>Wi-fi/Internet</li> : null}
+                </ul>
+            ))
                 
             return (
                 <Fragment>
@@ -96,16 +115,16 @@ export default class HouseDetails extends Component {
                                         <span>Note : {details.rating}/5</span>
                                         <img 
                                             onClick={this.addTowhishList}
-                                            src={require('../../images/fav.jpeg')}  alt='button favoris' title='ajouter au favoris'/>
+                                            src={require('../../images/fav.jpeg')}
+                                            alt='button favoris'
+                                            title='ajouter au favoris'/>
+                                        <span style={{color:'red', fontSize : '0.7em', marginTop: '-0.7rem'}}>
+                                            {this.state.noUser ? 'Veuillez vous authentifier svp' : null}
+                                        </span>
                                     </div>
                                     <div>
                                         <p>Services :</p>
-                                        <ul>
-                                            {services.breakfast ? <li>Repas</li> : null}
-                                            {services.landry    ? <li>Blanchisserie</li> : null}
-                                            {services.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
-                                            {services.wi_fi ? <li>Wi-fi/Internet</li> : null}
-                                        </ul>
+                                            {services}
                                         <span>{details.price} euros</span>
                                         <button
                                             onClick={this.handleClick}
