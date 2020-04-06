@@ -10,9 +10,9 @@ class Header extends Component {
         this.warapperRef = React.createRef();
         this.burgerRef   = React.createRef();
 
-        // this.state = {
-        //     firstName: localStorage.getItem('firstName') 
-        // }
+        this.state = {
+            token: localStorage.getItem('token')
+        }
     }
     handleClick = () =>{
         const wrapper = this.warapperRef.current
@@ -20,20 +20,35 @@ class Header extends Component {
         wrapper.classList.toggle('nav-open')
         burger.classList.toggle('change')
     }
-    logOut = () =>{
-        localStorage.removeItem("token")
-        this.props.history.push({
-            pathname: `/`
-        });  
+    logOut = async () =>{
+
+        const options = {
+            method : 'POST',
+            body : new URLSearchParams(this.state),
+            headers : {
+                'Content-type': 'application/x-www-form-urlencoded',
+                'Authorization': `bearer ${this.state.token}`
+            }
+        }
+        const response = await fetch(`http://localhost:4000/token`, options);
+        console.log(response)
+        if(response.status === 201){
+            const jsonData = await response.json();
+            console.log(jsonData)
+            localStorage.removeItem("token")
+            this.props.history.push({
+                pathname: `/register`
+            });  
+        }
     }
     render() {
 
         let logIn = null
-        if (localStorage.getItem('token') === null){
+        if (this.state.token === null){
             logIn = <li><Link to='/register'>Connexion</Link></li>
         }
         let logOut = null
-        if (localStorage.getItem('token') !== null) {
+        if (this.state.token !== null) {
             logOut = <li onClick={this.logOut}>Deconnexion</li>
         }
 

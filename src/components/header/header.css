@@ -1,5 +1,5 @@
 .header {
-    background-color: rgba(1, 1, 65, 0.876);
+    background-color: #090979;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -9,7 +9,10 @@
     z-index: 100;
 }
 .header h1 {
-    color: white;
+     background: -webkit-linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,212,255,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: oblique;
     text-align: center;
     font-size: 2rem;
     margin: 0.5rem;

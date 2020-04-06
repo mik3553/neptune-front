@@ -41,6 +41,7 @@ export default class HouseDetails extends Component {
         })
     }
     addTowhishList = async () => {
+        
         const options = {
             method: 'POST',
             body : new URLSearchParams({
@@ -52,11 +53,11 @@ export default class HouseDetails extends Component {
             }
         };
         const response = await fetch(`http://localhost:4000/whishList`, options);
-        if(response.ok){
+        if(response.status === 201){
             const jsonData = await response.json();
-            // console.log(jsonData)
+            console.log(jsonData)
         }
-        if(response.status === 403){
+        else{
             this.setState({
                 noUser : true
             })
