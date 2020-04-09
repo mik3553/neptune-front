@@ -27,7 +27,6 @@ export default class Comments extends Component {
         };
         const response = await fetch('http://localhost:4000/comments', options);
         const jsonData = await response.json();
-        console.log(jsonData);
 
         this.setState({
             comments: jsonData
@@ -53,11 +52,16 @@ export default class Comments extends Component {
                     <p>{comment.comment}</p>
                 </div> 
         })
+        
+        if (comments.length === 0){
+            return null
+        }else {
+            return (
+                <article className='comments'>
+                    {comments}
+                </article>
+            )
+        }
 
-        return (
-            <article className='comments'>
-                {comments}
-            </article>
-        )
     }
 }

@@ -1,0 +1,12 @@
+.booking {
+    margin: 1rem 0.5rem;
+    padding-bottom: 1rem;
+}
+.date {
+    display:flex;
+    justify-content: space-around;
+    /* flex-direction: row; */
+}
+.nbrOfPersons {
+    width: 5rem;
+}

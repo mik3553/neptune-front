@@ -36,6 +36,7 @@ class MyProfile extends Component {
             if (response.status === 200){
                 response.json()
                 .then(response => {
+                    console.log(response)
                     this.setState({
                         user: response,
                         userHouse    : response.advertiser,
@@ -50,16 +51,34 @@ class MyProfile extends Component {
             }
         })
     }
-    render() {
-        // if(localStorage.getItem('token') === null){
-        //     return <LoginPage />
-        // }
 
-        // const token = localStorage.getItem('token');
-        // // console.log(token);
-        // const decoded = decode(token)
-        // console.log(decoded);
-        const {user} = this.state;
+    deleteAccount = () => {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded',
+                'Authorization': `bearer ${localStorage.getItem('token')}`
+            }
+        }
+        fetch('http://localhost:4000/user', options)
+            .then(response => {
+                console.log(response.status)
+                if (response.status === 200) {
+                    console.log('compte supprimer avec succée');
+                    localStorage.removeItem('token');
+                    this.props.history.push({
+                        pathname: '/'
+                    })
+
+                } else {
+                    console.log('compte non supprimer');
+                }
+            })
+    }
+
+    render() {
+    
+        const { user, userWishList} = this.state;
         console.log(user);
         const houseInformation = [...this.state.userHouse]
         .map(item => (
@@ -74,9 +93,15 @@ class MyProfile extends Component {
                 <section className='myprofile'>
                     <PersonalInformations
                         user={user}
-                        wishList={this.state.userWishList}
+                        wishList={userWishList}
                     />
                     {houseInformation}
+                    <button
+                        className='deleteAccount'
+                        onClick={this.deleteAccount}
+                    >
+                        supprimer mon compte
+                    </button>
                 </section>
                 <Footer />
             </Fragment>

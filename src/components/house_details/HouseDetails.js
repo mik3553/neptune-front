@@ -4,6 +4,7 @@ import Footer from '../footer/Footer'
 import AwesomeSlider from 'react-awesome-slider';
 import Comments from './Comments';
 import AddComment from './AddComment';
+import Booking from '../booking/Booking';
 
 import './housedetails.css'
 
@@ -21,16 +22,16 @@ export default class HouseDetails extends Component {
     componentDidMount(){
         this.getHouse()
     }
-    getHouse = async ()=>{
+    getHouse = async () =>{
         const options = {
             method: 'GET',
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded'
             }
         };
-        const response = await fetch(`http://localhost:4000/house/${this.props.match.params.id}`, options);
-        const jsonData = await response.json();
-        const dataImage = await jsonData.images;
+        const response     = await fetch(`http://localhost:4000/house/${this.props.match.params.id}`, options);
+        const jsonData     = await response.json();
+        const dataImage    = await jsonData.images;
         const dataServices = await jsonData.services; 
         
         this.setState({
@@ -45,7 +46,7 @@ export default class HouseDetails extends Component {
         const options = {
             method: 'POST',
             body : new URLSearchParams({
-                _id: this.props.match.params.id
+                house_id: this.props.match.params.id
             }),
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded',
@@ -55,22 +56,14 @@ export default class HouseDetails extends Component {
         const response = await fetch(`http://localhost:4000/whishList`, options);
         if(response.status === 201){
             const jsonData = await response.json();
-            console.log(jsonData)
-        }
-        else{
-            this.setState({
-                noUser : true
-            })
+            console.log(jsonData);
+        }else {
+            this.setState({noUser : true})
         }
     }
     
     render() {
-        if(!this.state.details){
-            return (
-                <h3>Loading ...</h3>
-            )
-        }else {
-            const {details} = this.state
+            const details = {...this.state.details}
 
             const images = [...this.state.images]
                 .map(photo =>
@@ -126,19 +119,20 @@ export default class HouseDetails extends Component {
                                     <div>
                                         <p>Services :</p>
                                             {services}
-                                        <span>{details.price} euros</span>
-                                        <button
-                                            onClick={this.handleClick}
-                                        >
-                                            Réserver
-                                    </button>
+                                        <span>Prix par personne: {details.price} euros</span>
                                     </div>
                                 </div>
                             </figure>
+                            <article>
+                                <Booking 
+                                    house_id = {this.props.match.params.id}
+                                    house = {details}
+                                />
+                            </article>
                         </section>
 
                         <section className='house-details-page'>
-                            <span className='plus'></span>
+                            {/* <span className='plus'></span> */}
                             {
                                 localStorage.getItem('token') != null ? 
                                 <AddComment
@@ -148,12 +142,12 @@ export default class HouseDetails extends Component {
                             <Comments
                                 house_id={this.props.match.params.id}
                             />
-                            <span className='plus'></span>
+                            {/* <span className='plus'></span> */}
                         </section>
                     </main>
                     <Footer />
                 </Fragment>
             )
-        }
+        
     }
 }

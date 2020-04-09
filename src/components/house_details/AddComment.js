@@ -28,7 +28,7 @@ export default class AddComment extends Component {
         };
         const response = await fetch(`http://localhost:4000/comment`, options);
         const jsonData = await response.json();
-        console.log(jsonData)
+        console.log(jsonData);
     }
     render() {
         return (

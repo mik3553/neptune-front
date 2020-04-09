@@ -23,7 +23,6 @@
     margin: 0.5rem auto;
 }
 .myprofile button {
-    /* margin-left: 1rem; */
     display: block;
     width: 5rem;
     margin: 1rem auto;
@@ -65,6 +64,15 @@
 .alert-exit-active {
   opacity: 0;
   transition: opacity 500ms ease-in;
+}
+
+.deleteAccount {
+    width: 10rem !important;
+    padding: 0.5rem;
+   
+}
+.deleteAccount:hover {
+    background-color: red;
 }
 
 
