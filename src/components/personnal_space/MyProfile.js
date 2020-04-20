@@ -5,6 +5,7 @@ import Header from '../header/Header'
 import Footer from '../footer/Footer'
 import PersonalInformations from './PersonalInformations'
 import HouseInformations from './HouseInformations'
+import HouseBookings from './HouseBookings';
 
 
 import './myprofile.css'
@@ -32,7 +33,6 @@ class MyProfile extends Component {
         }
         fetch('http://localhost:4000/user_profile', options)
         .then(response => {
-            console.log(response.status)
             if (response.status === 200){
                 response.json()
                 .then(response => {
@@ -53,6 +53,7 @@ class MyProfile extends Component {
     }
 
     deleteAccount = () => {
+        alert('supprimer?')
         const options = {
             method: 'DELETE',
             headers: {
@@ -96,12 +97,16 @@ class MyProfile extends Component {
                         wishList={userWishList}
                     />
                     {houseInformation}
+
+                    <HouseBookings />
+                    
                     <button
                         className='deleteAccount'
                         onClick={this.deleteAccount}
                     >
                         supprimer mon compte
                     </button>
+
                 </section>
                 <Footer />
             </Fragment>

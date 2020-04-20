@@ -3,6 +3,7 @@
     width: 20rem;
     margin: 1rem auto;
     box-shadow: 0 5px 8px 0 grey;
+    padding: 1rem 0;
 }
 .localisation {
     margin: 0.5rem;
@@ -52,7 +53,6 @@
 .house-details-page-service img:hover {
     width: 3.5rem;
 }
-
 .comments {
     width: 95%;
     margin: 1rem auto;
@@ -70,7 +70,10 @@
 .comment-details p{
     padding: 0.5rem;
 }
-
+.addCommentMessage {
+    margin: 0 1rem;
+    color: #00d4ff;
+}
 .addComment {
     text-align: center;
     padding: 1rem;

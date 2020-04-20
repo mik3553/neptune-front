@@ -31,20 +31,27 @@ export default class AddComment extends Component {
         console.log(jsonData);
     }
     render() {
-        return (
-            <form 
-                onSubmit={this.AddComment}
-                className='addComment'
-            >
-                <label>laisser un commentaire</label>
-                <textarea
-                    onChange={this.handleChange}
-                    name='comment'
+        if (localStorage.getItem('token') == null){
+            return (
+                <p className='addCommentMessage'>Veuillez vous connecter pour laisser un commentaire</p>
+            )
+        }else{
+            return (
+                <form 
+                    onSubmit={this.AddComment}
+                    className='addComment'
+                >
+                    <label>laisser un commentaire</label>
+                    <textarea
+                        onChange={this.handleChange}
+                        name='comment'
+                        required
                     >
-                </textarea>
-                <button>valider</button>
-            </form>
-        )
+                    </textarea>
+                    <button>valider</button>
+                </form>
+            )
+        }
     }
 }
 

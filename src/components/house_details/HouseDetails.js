@@ -132,17 +132,12 @@ export default class HouseDetails extends Component {
                         </section>
 
                         <section className='house-details-page'>
-                            {/* <span className='plus'></span> */}
-                            {
-                                localStorage.getItem('token') != null ? 
-                                <AddComment
-                                    house_id={this.props.match.params.id}
-                                /> : null 
-                            }
+                            <AddComment
+                                house_id={this.props.match.params.id}
+                            />
                             <Comments
                                 house_id={this.props.match.params.id}
                             />
-                            {/* <span className='plus'></span> */}
                         </section>
                     </main>
                     <Footer />

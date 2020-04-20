@@ -7,18 +7,24 @@ class Header extends Component {
 
     constructor(props) {
         super(props)
-        this.warapperRef = React.createRef();
-        this.burgerRef   = React.createRef();
+        this.warapperRef    = React.createRef();
+        this.burgerRef      = React.createRef();
+        this.burgerRefTwo   = React.createRef();
+        this.burgerRefThree = React.createRef();
 
         this.state = {
             token: localStorage.getItem('token')
         }
     }
     handleClick = () =>{
-        const wrapper = this.warapperRef.current
-        const burger = this.burgerRef.current
-        wrapper.classList.toggle('nav-open')
-        burger.classList.toggle('change')
+        const wrapper = this.warapperRef.current;
+        const burger = this.burgerRef.current;
+        const burgerTwo = this.burgerRefTwo.current;
+        const burgerThree = this.burgerRefThree.current;
+        wrapper.classList.toggle('nav-open');
+        burger.classList.toggle('change');
+        burgerTwo.classList.toggle('change');
+        burgerThree.classList.toggle('change');
     }
     logOut = async () =>{
 
@@ -59,8 +65,8 @@ class Header extends Component {
                     className='burger-menu'
                     onClick = {this.handleClick}>
                     <div ref={this.burgerRef} className='burger1'></div>
-                    <div ref={this.burgerRef} className='burger2'></div>
-                    <div ref={this.burgerRef} className='burger3'></div>
+                    <div ref={this.burgerRefTwo} className='burger2'></div>
+                    <div ref={this.burgerRefThree} className='burger3'></div>
                 </div>
                 <nav
                     ref={this.warapperRef}

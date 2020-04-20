@@ -53,15 +53,10 @@ export default class Comments extends Component {
                 </div> 
         })
         
-        if (comments.length === 0){
-            return null
-        }else {
-            return (
-                <article className='comments'>
-                    {comments}
-                </article>
-            )
-        }
-
+        return (
+            <article className='comments'>
+                {comments}
+            </article>
+        )
     }
 }

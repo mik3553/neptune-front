@@ -7,7 +7,7 @@
     width: 90%;
     margin: 2rem auto;
 }
-.myprofile article {
+.myprofile article , .houseBookings {
     margin: 2rem auto;
     box-shadow: 0 5px 8px 0 grey;
     padding: 0.5rem;
@@ -41,17 +41,37 @@
 .whishlist p {
    margin: 0.5rem 0;
 }
-.whishlists a {
+/* .whishlists a {
     color: black;
-}
-.whishlists a:hover {
-	color: grey;
-}
+} */
+/* .whishlists a:hover, .myBookings li a:hover {
+	color: #00d4ff;
+} */
 .displayWish {
     display: none;
 }
+.houseBookings table {
+    /* width: 100%; */
+    margin: 1rem auto;
+}
+td {
+    padding: 5px 5px;
+    border-right: 1px solid #090979 ;
+    border-bottom: 1px solid #090979 ;
+    text-align: center;
+}
+td:last-of-type {
+    border-right: none;
+    /* border-bottom: 1px solid #090979 ; */
+}
+.myBookings li {
+    margin: 0.5rem auto;
+    list-style: inside ;
+}
 
-.alert-enter {
+
+
+/* .alert-enter {
   opacity: 0;
 }
 .alert-enter-active {
@@ -64,7 +84,7 @@
 .alert-exit-active {
   opacity: 0;
   transition: opacity 500ms ease-in;
-}
+} */
 
 .deleteAccount {
     width: 10rem !important;
@@ -85,7 +105,6 @@
 } */
 .houseInformations-toModify fieldset{
     display: flex;
-    
     margin: 0.5rem 0;
 }
 /* .button-modify {
@@ -96,23 +115,25 @@
 
 @media screen and (min-width: 800px){
     .myprofile {
-        box-shadow: 0 5px 8px 0 grey;
-        width: 35rem;
+       
+        width: 50rem;
     }
-    .myprofile article {
+    /* .myprofile article {
         width: 30rem;
         margin: 2rem auto;
         padding: 1rem;
     }
-    .myprofile div {
+    .myprofile div, .houseBookings {
         margin: 2rem auto;
-    }
+    } */
     .houseInformations-images {
         display: flex ;
         flex-wrap: wrap;
     }
+
+   
 }
-@media screen and (min-width: 1100px){
+/* @media screen and (min-width: 1100px){
     .myprofile {
         display: flex;
         justify-content: space-between;
@@ -129,7 +150,7 @@
     .myprofile div {
         margin: 2rem auto;
     }
-}
+} */
 
 
 /* .personalInformations */

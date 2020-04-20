@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import './booking.css';
 
-export default class Booking extends Component {
+class Booking extends Component {
     constructor(props) {
         super(props)
 
@@ -23,11 +24,12 @@ export default class Booking extends Component {
             this.setState({ priceEach : this.props.house.price});
         }
     } 
-    handleValidation = (arrival, departure, nbrOfPersons, storage) => {
+    handleValidation = (storage, arrival, departure, nbrOfPersons) => {
         const errors = [];
 
         if (storage == null ) {
             errors.push("veuillez vous authentifier");
+            return errors
         }
         if (arrival.length === 0 ) {
             errors.push("choisissez une date d'arrivée");
@@ -50,7 +52,7 @@ export default class Booking extends Component {
         event.preventDefault()
 
         const {arrival , departure , nbrOfPersons} = this.state;
-        const errors = this.handleValidation(arrival, departure, nbrOfPersons, localStorage.getItem('token'));
+        const errors = this.handleValidation(localStorage.getItem('token'),arrival, departure, nbrOfPersons);
         if (errors.length > 0) {
             this.setState({ errors });
             return;
@@ -65,26 +67,28 @@ export default class Booking extends Component {
             }
         };
         const response = await fetch(`http://localhost:4000/booking`, options);
-        console.log(response.status)
         if (response.status === 201) {
-            const jsonData = await response.json();
+            // const jsonData = await response.json();
             this.setState({
                 errors : [],
                 arrival:'',
                 departure:'',
                 nbrOfPersons:'',
-
             })
-            console.log(jsonData);
+            this.props.history.push({
+                pathname: `/reservation`,
+            })
         }
-        if (response.status === 403) {
-            const jsonData = await response.json();
-            console.log(jsonData);
+        if(response.status === 403) {
+            // const jsonData = await response.json();
+            // console.log(jsonData);
             localStorage.removeItem('token');
         }
-        if (response.status === 400) {
-            const jsonData = await response.json();
-            console.log(jsonData);
+        if(response.status === 400) {
+            // const jsonData = await response.json();
+            let errors = [...this.state.errors, 'veuillez vérifier vos dates svp' ];
+            this.setState({errors});
+            return errors;
         }
     }
     
@@ -124,7 +128,7 @@ export default class Booking extends Component {
                         value={this.state.nbrOfPersons}
                         name='nbrOfPersons'/>
                 </fieldset>
-                <input type='submit' value='valider' />
+                <button type='submit'>valider</button>
                 {errors.map(error => <p     
                                         style={{ color: 'red'}}
                                         key={error}>{error}</p>)}
@@ -132,3 +136,5 @@ export default class Booking extends Component {
         )
     }
 }
+
+export default withRouter(Booking);
