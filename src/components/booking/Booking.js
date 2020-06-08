@@ -16,7 +16,7 @@ class Booking extends Component {
             departure:'',
             nbrOfPersons:'',
             errors : [],
-            details : {}
+            // booking: {}
         }
     }
     componentDidUpdate(prevProps) {
@@ -68,15 +68,18 @@ class Booking extends Component {
         };
         const response = await fetch(`http://localhost:4000/booking`, options);
         if (response.status === 201) {
-            // const jsonData = await response.json();
+            const jsonData = await response.json();
+            console.log(jsonData)
             this.setState({
                 errors : [],
                 arrival:'',
                 departure:'',
                 nbrOfPersons:'',
+                booking: jsonData
             })
             this.props.history.push({
                 pathname: `/reservation`,
+                state : {booking : jsonData}
             })
         }
         if(response.status === 403) {

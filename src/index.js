@@ -8,6 +8,7 @@ import LoginPage from './components/register_login/LoginPage'
 import HouseDetails from './components/house_details/HouseDetails'
 import MyProfile from './components/personnal_space/MyProfile';
 import Finalize from './components/booking/Finalize';
+import Admin from './components/admin/Admin'
 import * as serviceWorker from './serviceWorker';
 
 const Routes = () => {
@@ -19,6 +20,7 @@ const Routes = () => {
                     <Route path='/mon_compte' component={MyProfile} />
                     <Route path='/house_details/:id' component={HouseDetails} />
                     <Route path='/reservation' component={Finalize} />
+                    <Route path='/admin' component={Admin} />
                 </Switch>
             </BrowserRouter>
         )

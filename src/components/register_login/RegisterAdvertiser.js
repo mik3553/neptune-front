@@ -17,7 +17,7 @@ export default class RegisterForm extends Component {
             description:'',
             adress:'',
             zipcode:'',
-            department:'',
+            region:'',
             nbrOfRooms:'',
             nbrOfBeds:'',
             price:'',
@@ -39,8 +39,8 @@ export default class RegisterForm extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault() 
-        const { title, adress, zipcode, department, nbrOfRooms, nbrOfBeds, price, images} = this.state
-        if (this.nameError(this.state.firstName, this.state.lastName) && this.checkEmail(this.state.email) && this.checkPassword(this.state.password) && this.state.password === this.state.passwordC && this.checkHouseInformations(title, adress, zipcode, department, nbrOfRooms, nbrOfBeds, price, images) ) {
+        const { title, adress, zipcode, region, nbrOfRooms, nbrOfBeds, price, images} = this.state
+        if (this.nameError(this.state.firstName, this.state.lastName) && this.checkEmail(this.state.email) && this.checkPassword(this.state.password) && this.state.password === this.state.passwordC && this.checkHouseInformations(title, adress, zipcode, region, nbrOfRooms, nbrOfBeds, price, images) ) {
             console.log('helloo')
             const inputFile = document.getElementById('images').files
             const formData = new FormData()
@@ -55,7 +55,7 @@ export default class RegisterForm extends Component {
             formData.append('adress', this.state.adress)
             formData.append('zipcode', this.state.zipcode)
             formData.append('password', this.state.password)
-            formData.append('department', this.state.department)
+            formData.append('region', this.state.region)
             formData.append('nbrOfRooms', this.state.nbrOfRooms)
             formData.append('nbrOfBeds', this.state.nbrOfBeds)
             formData.append('price', this.state.price)
@@ -123,8 +123,8 @@ export default class RegisterForm extends Component {
             return true
         }
     }
-    checkHouseInformations = (title, adress, zipcode, department, nbrOfRooms, nbrOfBeds, price, images) =>{
-        if (title === '' || adress === '' || zipcode === '' || department === '' || nbrOfRooms === '' || nbrOfBeds === '' || price === '' || images === ''){
+    checkHouseInformations = (title, adress, zipcode, region, nbrOfRooms, nbrOfBeds, price, images) =>{
+        if (title === '' || adress === '' || zipcode === '' || region === '' || nbrOfRooms === '' || nbrOfBeds === '' || price === '' || images === ''){
             this.setState({ houseInfo : true})
             return false
         }else {
@@ -247,12 +247,33 @@ export default class RegisterForm extends Component {
                                     onChange={this.handleChange} />
                             </div>
                             <div className='fieldset'>
-                                <label>Département :</label>
-                                <input
+                                <label>Région :</label>
+                                <select name="region" type="text" onChange={this.handleChange}>
+                                    <option value="">--Please choose an option--</option>
+                                    <option value="Auvergne-Rhône-Alpes">Auvergne-Rhône-Alpes</option>
+                                    <option value="Bourgogne-Franche-Comté">Bourgogne-Franche-Comté</option>
+                                    <option value="Bretagne">Bretagne</option>
+                                    <option value="Centre-Val de Loire">Centre-Val de Loire</option>
+                                    <option value="corse">Corse</option>
+                                    <option value="Grand Est">Grand Est</option>
+                                    <option value="Guadeloupe">Guadeloupe</option>
+                                    <option value="Guyane">Guyane</option>
+                                    <option value="Hauts-de-France">Hauts-de-France</option>
+                                    <option value="Île-de-France">Île-de-France</option>
+                                    <option value="La Réunion">La Réunion</option>
+                                    <option value="Martinique">Martinique</option>
+                                    <option value="Mayotte">Mayotte</option>
+                                    <option value="Normandie">Normandie</option>
+                                    <option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
+                                    <option value="Occitanie">Occitanie</option>
+                                    <option value="Pays de la Loire">Pays de la Loire</option>
+                                    <option value="Provence-Alpes-Côte d'Azur">Provence-Alpes-Côte d'Azur</option>
+                                </select>
+                                {/* <input
                                     type='text'
                                     name='department'
                                     value={this.state.department}
-                                    onChange={this.handleChange} />
+                                    onChange={this.handleChange} /> */}
                             </div>
                             <div className='fieldset'>
                                 <label>nombre de chambre :</label>

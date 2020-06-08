@@ -26,15 +26,15 @@ class House extends Component {
             }
         }
         const images = details.images
-        .map(item =>
+        .map(image =>
             <div
                 className='image-slide'
-                key={item}
-                data-src={requireImage(item)} />
+                key={image}
+                data-src={requireImage(image)} />
         )
 
         return (
-            <figure className='house'>
+            <figure className='house' onClick={this.handleClick}>
                 <AwesomeSlider 
                     className='slider'>
                     {images}
