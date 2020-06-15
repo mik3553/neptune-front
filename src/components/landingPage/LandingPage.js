@@ -24,6 +24,7 @@ export default class LandingPage extends Component {
         .then(response => {
             response.json()
             .then(response =>{
+                console.log(response)
                 this.setState({houses : response})
             });
         })
@@ -37,7 +38,7 @@ export default class LandingPage extends Component {
         if (this.state.region !== '' ){
             fetch('http://localhost:4000/house/searchBar/'+this.state.region, {methode : 'GET'})
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 if(response.status === 200) {
                     response.json()
                     .then(response =>{
@@ -46,6 +47,7 @@ export default class LandingPage extends Component {
                             this.setState({houses : response, noHouses: null});
                         } else if (this.state.region === 'Toute les régions'){
                             this.getHouses();
+                            this.setState({ noHouses: null});
                         } else {
                             this.setState({ houses : [],noHouses: 'Pas encore de maisons d\'hotes dans cette région' });
                         }
@@ -69,12 +71,11 @@ export default class LandingPage extends Component {
         let noHouses = this.state.noHouses;
         const houses = [...this.state.houses]
             .map(house => {
-                if(house.isAccepted === false){
-                    return (
-                         <House 
-                             key={house._id}
-                             details={house}/>
-                     )
+                if(house.isAccepted === true){
+                    return  <House 
+                                key={house._id}
+                                details={house}
+                            />
                 }
             })
         return (
