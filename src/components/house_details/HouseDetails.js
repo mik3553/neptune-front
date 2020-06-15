@@ -2,9 +2,11 @@ import React, { Component, Fragment } from 'react'
 import Header from '../header/Header'
 import Footer from '../footer/Footer'
 import AwesomeSlider from 'react-awesome-slider';
-import './housedetails.css'
 import Comments from './Comments';
 import AddComment from './AddComment';
+import Booking from '../booking/Booking';
+
+import './housedetails.css'
 
 export default class HouseDetails extends Component {
 
@@ -13,36 +15,38 @@ export default class HouseDetails extends Component {
         this.state = {
             details : {},
             images : [],
-            services : {},
+            services : [],
         }
     }
     
     componentDidMount(){
         this.getHouse()
     }
-    getHouse = async ()=>{
+    getHouse = async () =>{
         const options = {
             method: 'GET',
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded'
             }
         };
-        const response = await fetch(`http://localhost:4000/house/${this.props.match.params.id}`, options);
-        const jsonData = await response.json();
-        const dataImage = await jsonData.images;
+        const response     = await fetch(`http://localhost:4000/house/${this.props.match.params.id}`, options);
+        const jsonData     = await response.json();
+        const dataImage    = await jsonData.images;
         const dataServices = await jsonData.services; 
         
         this.setState({
             details : jsonData,
             images : dataImage,
             services: dataServices,
+            noUser : false
         })
     }
-    addTowhishList = async (event) => {
+    addTowhishList = async () => {
+        
         const options = {
             method: 'POST',
             body : new URLSearchParams({
-                _id: this.props.match.params.id
+                house_id: this.props.match.params.id
             }),
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded',
@@ -50,17 +54,16 @@ export default class HouseDetails extends Component {
             }
         };
         const response = await fetch(`http://localhost:4000/whishList`, options);
-        const jsonData = await response.json();
-        console.log(jsonData)
+        if(response.status === 201){
+            const jsonData = await response.json();
+            console.log(jsonData);
+        }else {
+            this.setState({noUser : true})
+        }
     }
     
     render() {
-        if(!this.state.details){
-            return (
-                <h3>Loading ...</h3>
-            )
-        }else {
-            const {details} = this.state
+            const details = {...this.state.details}
 
             const images = [...this.state.images]
                 .map(photo =>
@@ -69,7 +72,17 @@ export default class HouseDetails extends Component {
                         key={photo}
                         data-src={`http://localhost:4000/${photo}`} />
                 )
-            const services = {...this.state.services}
+            const services = [...this.state.services]
+            .map(service => (
+                <ul
+                    key={service._id}
+                >
+                    {service.breakfast ? <li>Repas</li> : null}
+                    {service.landry ? <li>Blanchisserie</li> : null}
+                    {service.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
+                    {service.wi_fi ? <li>Wi-fi/Internet</li> : null}
+                </ul>
+            ))
                 
             return (
                 <Fragment>
@@ -96,44 +109,40 @@ export default class HouseDetails extends Component {
                                         <span>Note : {details.rating}/5</span>
                                         <img 
                                             onClick={this.addTowhishList}
-                                            src={require('../../images/fav.jpeg')}  alt='button favoris' title='ajouter au favoris'/>
+                                            src={require('../../images/fav.jpeg')}
+                                            alt='button favoris'
+                                            title='ajouter au favoris'/>
+                                        <span style={{color:'red', fontSize : '0.7em', marginTop: '-0.7rem'}}>
+                                            {this.state.noUser ? 'Veuillez vous authentifier svp' : null}
+                                        </span>
                                     </div>
                                     <div>
                                         <p>Services :</p>
-                                        <ul>
-                                            {services.breakfast ? <li>Repas</li> : null}
-                                            {services.landry    ? <li>Blanchisserie</li> : null}
-                                            {services.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
-                                            {services.wi_fi ? <li>Wi-fi/Internet</li> : null}
-                                        </ul>
-                                        <span>{details.price} euros</span>
-                                        <button
-                                            onClick={this.handleClick}
-                                        >
-                                            Réserver
-                                    </button>
+                                            {services}
+                                        <span>Prix par personne: {details.price} euros</span>
                                     </div>
                                 </div>
                             </figure>
+                            <article>
+                                <Booking 
+                                    house_id = {this.props.match.params.id}
+                                    house = {details}
+                                />
+                            </article>
                         </section>
 
                         <section className='house-details-page'>
-                            <span className='plus'></span>
-                            {
-                                localStorage.getItem('token') != null ? 
-                                <AddComment
-                                    house_id={this.props.match.params.id}
-                                /> : null 
-                            }
+                            <AddComment
+                                house_id={this.props.match.params.id}
+                            />
                             <Comments
                                 house_id={this.props.match.params.id}
                             />
-                            <span className='plus'></span>
                         </section>
                     </main>
                     <Footer />
                 </Fragment>
             )
-        }
+        
     }
 }

@@ -1,0 +1,19 @@
+.getUsers {
+    display: flex;
+    justify-content: space-evenly;
+}
+.getUsers table {
+    margin: 1rem auto;
+}
+
+.getUsers thead {
+    background-color: #00d4ff;;
+}
+
+.displayNone {
+    display: none;
+}
+
+.notOnLine {
+    background-color: orange;
+}

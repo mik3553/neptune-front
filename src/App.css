@@ -47,12 +47,16 @@ table {
 	border-spacing: 0;
 }
 
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
 a {
 	text-decoration: none;
-	color: white;
+	color: #B7C2C5 ;
 }
 a:hover {
-	color: grey;
+	color: #00d4ff;
 }
 
 h2 {
@@ -60,9 +64,14 @@ h2 {
 	text-align: center;
 	margin: 1rem auto;
 	font-weight: 900;
+	color: #090979;
 }
 h3 {
 	font-size: 1.2em;
 	text-align: center;
 	margin: 1rem auto;
+}
+
+form button {
+	background-color: #00d4ff;
 }

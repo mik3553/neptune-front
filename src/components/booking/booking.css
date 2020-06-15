@@ -1,0 +1,30 @@
+.booking {
+    margin: 1rem 0.5rem;
+    padding-bottom: 1rem;
+}
+.date {
+    display:flex;
+    justify-content: space-around;
+    /* flex-direction: row; */
+}
+.nbrOfPersons {
+    width: 5rem;
+}
+.finalize section {
+    width: 20rem;
+    margin: 1rem auto;
+    padding: 1rem 0;
+    box-shadow: 0 5px 8px 0 grey;
+}
+.finalize article {
+    margin: 1rem 1rem;
+}
+.finalize li {
+    list-style: initial;
+    margin-left: 1rem;
+}
+.payment img {
+    display: block;
+    width: 10rem;
+    margin: 1rem auto;
+}

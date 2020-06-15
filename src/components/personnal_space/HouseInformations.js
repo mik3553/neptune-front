@@ -16,6 +16,7 @@ export default class PersonalInformations extends Component {
             }
         }
         let services = this.state.details.services
+        console.log(services)
         fetch(`http://localhost:4000/service/${services}`, options)
         .then(response => {
             response.json()
@@ -36,10 +37,17 @@ export default class PersonalInformations extends Component {
         if(isShow){
             houseToModify = <HouseToModify
                                 details={this.state.details}
+                                services = {this.state.services}
                             />
         }
        
         const {details}=this.state
+        let creationDate = details.creationDate
+        let date = new Date(creationDate)
+        let day = date.getDate()
+        let month = date.getMonth() + 1
+        let year = date.getFullYear()
+        let house_creation_date = `${day}-${month}-${year}`
         const services = {...this.state.services}
             // .map(service => (
             //     <ul key={service._id}>
@@ -55,7 +63,7 @@ export default class PersonalInformations extends Component {
             <article className='houseInformations'>
                 <div>
                     <h2>Informations de ma maison d'hôtes ({details.title})</h2>
-                    <p><span>date d'ajoût : </span>{details.creationDate}</p>
+                    <p><span>date d'ajoût : </span>{house_creation_date}</p>
                     <p><span>est en ligne : </span>{details.isAccepted === true ? 'Oui' : 'Non'}</p>
                     <p><span>description : </span>{details.description}</p>
                     <p><span>addresse : </span>{details.adress}</p>

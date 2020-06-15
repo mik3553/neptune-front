@@ -16,6 +16,9 @@
     margin: 0.5rem auto;
     padding: 0.5rem;
 }
+.house-details button {
+    background-color: #00d4ff;
+}
 
 .house-details {
     display: flex;
