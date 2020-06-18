@@ -9,33 +9,51 @@ export default class PersonalInformations extends Component {
             bookings : []
         }
     }
+    abortController = new AbortController();
     componentDidMount(){
         let options = {
+            signal: this.abortController.signal,
             method: 'GET',
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded',
                 'Authorization' : `bearer ${localStorage.getItem('token')}`
-            }
+            },
+            
         }
-        fetch(`http://localhost:4000/houseBookings`, options)
-            .then(response => {
-                response.json()
-                    .then(response => {
-                        console.log(response)
-                        // let bookings = [...this.state.bookings, response];
-                        this.setState({bookings: response})
-                    })
-            })
+        if(localStorage.getItem('token') !== null){
+            fetch(`http://localhost:4000/houseBookings`, options)
+                .then(response => {
+                    response.json()
+                        .then(response => {
+                            console.log(response)
+                            // let bookings = [...this.state.bookings, response];
+                            this.setState({ bookings: response })
+                        })
+                        .catch(err => {
+                            this.setState({ bookings: [] })
+                        })
+                })
+                .catch(err => {
+                    this.setState({ bookings: [] })
+                })
+        }
+        
+    }
+    componentWillUnmount() {
+        this.abortController.abort();
     }
 
     render() {
-        const bookings = [...this.state.bookings]
-        .map(booking => (
-            <BookingDetails
-                key={booking._id}
-                details={booking}
-            />
-        ))
+        let bookings = []
+        if(this.state.bookings.length > 0){
+             bookings = [...this.state.bookings]
+            .map(booking => (
+                <BookingDetails
+                    key={booking._id}
+                    details={booking}
+                />
+            ))
+        }
         console.log(this.state.bookings)
         return (
             <article className='houseBookings'>

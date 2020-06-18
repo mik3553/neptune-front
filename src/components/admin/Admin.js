@@ -112,11 +112,8 @@ export default class Admin extends Component {
                 })
             }
         })
-
         // et pour le visu 
-
-        this.btn[index].classList.toggle('notOnLine');
-        
+        // this.btn[index].classList.toggle('notOnLine');
     }
 
     render() {

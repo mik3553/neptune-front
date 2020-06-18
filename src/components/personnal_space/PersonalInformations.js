@@ -9,42 +9,57 @@ export default class PersonalInformations extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            deleteWish : false,
+            
             user : {},
             userBookings : [],
         }
+
+        this.btn = [];
     }
+    abortController = new AbortController();
+    ismounted = false;
     componentDidMount(){
+        this.ismounted = true
         const options = {
+            signal: this.abortController.signal,
             method: 'GET',
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded',
                 'Authorization': `bearer ${localStorage.getItem('token')}`
-            }
+            }, 
         }
-        fetch('http://localhost:4000/userBookings', options)
-            .then(response => {
-                if (response.status === 200) {
-                    response.json()
-                        .then(response => {
-                            console.log(response)
-                            this.setState({
-                                userBookings : response
-                            });
-                        })
-                }
-            })
+        if (localStorage.getItem('token') !== null){
+            fetch('http://localhost:4000/userBookings',
+                options)
+                .then(response => {
+                    if (response.status === 200) {
+                        response.json()
+                            .then(response => {
+                                if(this.ismounted){
+                                    console.log(response)
+                                    this.setState({
+                                        userBookings: response
+                                    });
+                                }
+                            })
+                    }
+                })
+        }
+       
     }
+    componentWillUnmount() {
+        this.abortController.abort();
+        this.ismounted = false
+
+    }
+   
     componentDidUpdate(prevProps) {
         if (this.props.user !== prevProps.user) {
             this.setState({ user: this.props.user });
         }
+        
     }
-    deleteWish = (event) => {
-        this.setState({
-            deleteWish : true
-        })
-    }
+
     render() { 
         // console.log(this.state.user)
         const {user} = this.state
@@ -56,9 +71,9 @@ export default class PersonalInformations extends Component {
         let user_creation_date = `${day}-${month}-${year}`
 
         const wishList = [...this.props.wishList]
-            .map(wish => 
+            .map((wish, index) => 
                 (<li
-                    style={{ display: this.state.deleteWish ? 'none' : null }  }
+                    ref = {(ref) => this.btn[index] = ref}
                     key={wish._id}
                     className='whishlist'>
                     <Link
@@ -67,8 +82,9 @@ export default class PersonalInformations extends Component {
                         <p><span>{wish.title}</span> ({wish.description})</p>
                     </Link>
                     <DeleteWish
-                        wish_id={wish._id}
-                        deleted={this.deleteWish}
+                        wish_id={wish._id} 
+                        reference={this.btn}
+                        index={index}
                     />
                 </li>)         
             )

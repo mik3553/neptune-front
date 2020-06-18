@@ -38,7 +38,7 @@ export default class HouseDetails extends Component {
             details : jsonData,
             images : dataImage,
             services: dataServices,
-            noUser : false
+            noUser : null
         })
     }
     addTowhishList = async () => {
@@ -55,10 +55,15 @@ export default class HouseDetails extends Component {
         };
         const response = await fetch(`http://localhost:4000/whishList`, options);
         if(response.status === 201){
-            const jsonData = await response.json();
-            console.log(jsonData);
+            // const jsonData = await response.json();
+            // console.log(jsonData);
+            this.setState({ noUser: 'Ajoutée à votre favoris avec succé' });
+        }else if (response.status === 204) {
+            this.setState({noUser : 'Existe déja dans vos favoris'});
+        }else if (response.status == 403){
+            this.setState({ noUser: 'Veuillez vous authentifier svp !' });
         }else {
-            this.setState({noUser : true})
+            this.setState({ noUser: 'probléme avec la maison d\'hote' });
         }
     }
     
@@ -112,8 +117,8 @@ export default class HouseDetails extends Component {
                                             src={require('../../images/fav.jpeg')}
                                             alt='button favoris'
                                             title='ajouter au favoris'/>
-                                        <span style={{color:'red', fontSize : '0.7em', marginTop: '-0.7rem'}}>
-                                            {this.state.noUser ? 'Veuillez vous authentifier svp' : null}
+                                        <span style={{color:'red', fontSize : '0.7em', marginTop: '-0.5rem'}}>
+                                            {this.state.noUser != null ? this.state.noUser : null}
                                         </span>
                                     </div>
                                     <div>

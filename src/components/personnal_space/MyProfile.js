@@ -7,9 +7,7 @@ import PersonalInformations from './PersonalInformations'
 import HouseInformations from './HouseInformations'
 import HouseBookings from './HouseBookings';
 
-
 import './myprofile.css'
-
 
 class MyProfile extends Component {
     constructor(props) {
@@ -17,14 +15,18 @@ class MyProfile extends Component {
         this.state = {
             user:{},
             userHouse:[],
-            userWishList:[]
+            userWishList:[],
+            decoded : {}
         }
     }
     componentDidMount(){
         this.getUser();
+        console.log(localStorage.getItem('token'))
     }
+    abortController = new AbortController();
     getUser = () =>{
         const options = {
+            signal : this.abortController.signal,
             method : 'GET',
             headers : {
                 'Content-type':'application/x-www-form-urlencoded',
@@ -38,9 +40,10 @@ class MyProfile extends Component {
                 .then(response => {
                     console.log(response)
                     this.setState({
-                        user: response,
-                        userHouse    : response.advertiser,
-                        userWishList : response.wishList
+                        decoded : response.decoded,
+                        user: response.user,
+                        userHouse    : response.user.advertiser,
+                        userWishList : response.user.wishList
                     });
                 })
             }else {
@@ -50,6 +53,9 @@ class MyProfile extends Component {
                 })
             }
         })
+    }
+    componentWillUnmount(){
+        this.abortController.abort();
     }
 
     deleteAccount = () => {
@@ -70,7 +76,6 @@ class MyProfile extends Component {
                     this.props.history.push({
                         pathname: '/'
                     })
-
                 } else {
                     console.log('compte non supprimer');
                 }
@@ -79,8 +84,15 @@ class MyProfile extends Component {
 
     render() {
     
-        const { user, userWishList} = this.state;
-        console.log(user);
+        const { user, userWishList, decoded} = this.state;
+        let date = new Date();
+        let getTime = date.getTime()
+        console.log(getTime);
+        if(getTime > decoded.exp){
+            console.log('pas encore heur')
+        }else {
+            console.log('detruit')
+        }
         const houseInformation = [...this.state.userHouse]
         .map(item => (
             <HouseInformations

@@ -8,8 +8,10 @@ export default class PersonalInformations extends Component {
         details : this.props.details,
         services : {}
     }
+    abortController = new AbortController();
     componentDidMount(){
         let options = {
+            signal: this.abortController.signal,
             method : 'GET',
             headers : {
                 'Content-type': 'application/x-www-form-urlencoded',
@@ -24,6 +26,9 @@ export default class PersonalInformations extends Component {
                 this.setState({services : response});
             })
         })
+    }
+    componentWillUnmount() {
+        this.abortController.abort();
     }
 
     handleShow = () => {

@@ -1,7 +1,9 @@
 import React from 'react';
 
 
-export default function DeleteWish({wish_id, deleted}) {
+export default function DeleteWish({wish_id, reference,index}) {
+
+    console.log(reference)
 
     const deleteWhish = async () => {
         let options = {
@@ -17,7 +19,11 @@ export default function DeleteWish({wish_id, deleted}) {
         const response = await fetch(`http://localhost:4000/whishList`, options);
         const jsonData = await response.json();
         console.log(jsonData);
-        deleted();
+        // supprimer le visu
+
+        reference[index].classList.add('displayWish');
+        // this.btn[index].classList.add('displayNone');
+
     }
     return (
         <button
