@@ -77,6 +77,9 @@ class Header extends Component {
                         <li>
                             <Link to='/mon_compte'>Mon compte</Link>
                         </li>
+                        <li>
+                            <Link to='/contact'>Contact</Link>
+                        </li>
                     </ul>
                 </nav>
             </header>

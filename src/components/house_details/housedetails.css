@@ -61,7 +61,7 @@
     border: 1px solid rgba(1, 1, 65, 0.876);
     margin: 1rem auto;
 }
-.comment-details span{
+.comment-span{
     display: block;
     padding: 0.5rem;
     background-color: rgba(1, 1, 65, 0.15);
