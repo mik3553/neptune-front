@@ -1,19 +1,75 @@
 .getUsers {
     display: flex;
     justify-content: space-evenly;
+    box-shadow: 0 5px 8px 0 grey;
+    margin: 2rem auto;
+    width: 90%;
 }
 .getUsers table {
     margin: 1rem auto;
 }
 
 .getUsers thead {
-    background-color: #00d4ff;;
+    background-color: #00d4ff;
 }
 
 .displayNone {
     display: none;
 }
+.displayArticle {
+    display: none;
+}
 
 .notOnLine {
     background-color: orange;
+}
+.onLine {
+    background-color: #00d4ff ;
+    opacity: 0.5;
+}
+
+.getMessages {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    box-shadow: 0 5px 8px 0 grey;
+    margin: 2rem auto;
+    width: 90%;
+}
+.comment-details.messages {
+    width: 60%;
+    margin: 0.5rem 0;
+}
+.messageFlex {
+    display: flex;
+    justify-content: center;
+    /* margin: 1rem 0; */
+}
+.messageFlex button {
+    margin: 0.5rem 0;
+}
+.comment-details.messages:hover {
+    cursor: pointer;
+}
+
+.messageLength {
+    text-align: center;
+    /* margin: auto; */
+}
+.closed {
+    background-color: rgba(1, 1, 65, 0.15);
+    
+}
+.opened {
+    background-color: #00d4ff ;
+    opacity: 0.5;
+}
+.message-blue {
+    background-color: #00d4ff ;
+    opacity: 0.5;
+}
+.message-close {
+    display: none;
+}
+.open {
+    display: block;
 }

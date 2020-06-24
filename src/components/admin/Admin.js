@@ -3,6 +3,7 @@ import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import GetClients from './GetClients';
 import GetAdvertisers from './GetAdvertisers';
+import Messages from './Message';
 import './admin.css';
 // import formatDate from '../../utils/formatDate';
 
@@ -16,7 +17,9 @@ export default class Admin extends Component {
             clients : [],
             advertisers : [],
             houses : [],
-            toogleValidateHouse : false
+            messages : [],
+            countMessage : null
+            // toogleValidateHouse : false
         }
 
         // this.displayNone = null;
@@ -29,14 +32,69 @@ export default class Admin extends Component {
         // }
 
         this.btn = [];
+        this.opened = [];
+        this.displayArticle = [];
     }
     
     componentDidMount(){
         this.getUsers();
-
-        //function pour laffichage  validateHouse au mojtage seulement
-       
+        this.messages();
+        this.countMessages();
     }
+    // componentDidUpdate(prevProps, prevState){
+    //     console.log(prevState.advertisers)
+    //     console.log(this.state.advertisers)
+    //     // let advertisers = this.state.advertisers
+    //     // console.log(advertisers);
+    //     // if (advertisers !== prevState.advertisers){
+    //     //     // this.getUsers();
+    //     //     // this.setState({advertisers});
+    //     // }
+    // }
+    messages = async (event) => {
+        if (!localStorage.getItem('token')) {
+            this.setState({ isAuthorised: false })
+        } else {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/x-www-form-urlencoded',
+                    'Authorization': `bearer ${localStorage.getItem('token')}`
+                }
+            };
+            const response = await fetch('http://localhost:4000/messages', options);
+            if (response.status === 200) {
+                const jsonResponse = await response.json();
+                this.setState({messages : jsonResponse})
+                console.log(jsonResponse);
+                this.setState({ isAuthorised: true });
+            } else {
+                this.setState({ isAuthorised: false });
+            }
+        }
+    }
+    countMessages = async (event) => {
+        if (!localStorage.getItem('token')) {
+            this.setState({ isAuthorised: false })
+        } else {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/x-www-form-urlencoded',
+                    'Authorization': `bearer ${localStorage.getItem('token')}`
+                }
+            };
+            const response = await fetch('http://localhost:4000/countMessage', options);
+            if (response.status === 200) {
+                const jsonResponse = await response.json();
+                console.log(jsonResponse);
+                this.setState({ countMessage: jsonResponse })
+                this.setState({ isAuthorised: true });
+            } else {
+                this.setState({ isAuthorised: false });
+            }
+        }
+    }  
  
 
     getUsers = async (event) => {
@@ -90,7 +148,7 @@ export default class Admin extends Component {
         })
     }
     validateHouse = (e,id, isAccepted, index) => {
-        // e.preventDefault();
+        e.preventDefault();
         const options = {
             method: 'PUT',
             body: new URLSearchParams({
@@ -105,15 +163,69 @@ export default class Admin extends Component {
         fetch('http://localhost:4000/validateHouse', options)
         .then(response => {
             if(response.status === 200){
-                this.setState({toogleValidateHouse : true})
+                // this.setState({toogleValidateHouse : true})
                 response.json()
                 .then(response => {
+                    
                     console.log(response)
+                    if(response === true){
+                        this.btn[index].classList.remove('notOnLine');
+                        this.btn[index].classList.add('onLine');
+                    }else {
+                        this.btn[index].classList.remove('onLine');
+                        this.btn[index].classList.add('notOnLine');
+                    }
                 })
             }
         })
-        // et pour le visu 
-        // this.btn[index].classList.toggle('notOnLine');
+        
+    }
+    openMessage = (event,id, index) => {
+        event.preventDefault()
+        const options = {
+            method: 'PUT',
+            body: new URLSearchParams({
+                _id: id,
+            }),
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded',
+                'Authorization': `bearer ${localStorage.getItem('token')}`
+            }
+        }
+        fetch('http://localhost:4000/opened', options)
+            // .then(response => {
+
+            //     if (response.status === 200) {
+            //         this.setState({countMessage : this.state.countMessage - 1})
+            //     }
+            // })
+        this.btn[index].classList.toggle('open');
+        this.opened[index].classList.remove('opened');
+        this.opened[index].classList.add('message-blue');
+        this.countMessages();
+    }
+    deleteMessage = (event, id, index) => {
+        event.preventDefault()
+        const options = {
+            method: 'DELETE',
+            body: new URLSearchParams({
+                _id: id,
+            }),
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded',
+                'Authorization': `bearer ${localStorage.getItem('token')}`
+            }
+        }
+        fetch('http://localhost:4000/deleteMessage', options)
+        // .then(response => {
+
+        //     if (response.status === 200) {
+        //         this.setState({countMessage : this.state.countMessage - 1})
+        //     }
+        // })
+        this.displayArticle[index].classList.remove('messageFlex');
+        this.displayArticle[index].classList.add('displayArticle');
+
     }
 
     render() {
@@ -134,6 +246,7 @@ export default class Admin extends Component {
             .map((advertiser, index) => {
                 return (
                     <GetAdvertisers
+                        getUsers={this.getUsers}
                         validateHouse={this.validateHouse}
                         checkHouse={this.checkHouse}
                         btn={this.btn}
@@ -143,8 +256,23 @@ export default class Admin extends Component {
                         advertiser={advertiser} />
                 )
             })
-      
+        let messages = [...this.state.messages]
+            .map((message, index) => {
+                return (
+                    <Messages
+                        opened={this.opened}
+                        btn={this.btn}
+                        key={message._id}
+                        index={index}
+                        details={message}
+                        openMessage={this.openMessage}
+                        deleteMessage={this.deleteMessage}
+                        displayArticle={this.displayArticle}
+                    />
+                )
+            })
 
+    
         if(isAuthorised === false){
             return (
                 <Fragment>
@@ -194,10 +322,15 @@ export default class Admin extends Component {
                                 </table>
                             </article>
                         </section>
+                        <section className='getMessages'>
+                            <h2>Boite de réception</h2>
+                            <p className='messageLength'>Vous avez {this.state.countMessage} nouveaux messages</p>
+                            {messages}
+                        </section>
                     </main>
                     <Footer />
                 </Fragment>
-            )
+            )   
         }
     }
 }

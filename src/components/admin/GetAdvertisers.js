@@ -1,15 +1,20 @@
-import React from 'react';
+import React , {useState , useEffect} from 'react';
 import formDate from '../../utils/formatDate'
 
 const GetAdvertisers = ({ advertiser, deleteUser, btn, index, checkHouse, validateHouse }) => {
 
     let isAccepted = advertiser.advertiser[0].isAccepted === false ? 'mettre en ligne' : 'mettre hors ligne' ;
    
+    // useEffect(() => {
+        // getUsers();
+    // }, [advertiser]); 
+
+    
     return (
             <tr 
-                data-advertiser={advertiser.advertiser[0]}
                 ref={(ref) => btn[index] = ref}
-                style = {advertiser.advertiser[0].isAccepted === false ? { backgroundColor: 'orange' } : { backgroundColor: 'initial' }}
+                className={advertiser.advertiser[0].isAccepted ? 'onLine' : 'notOnLine'}
+                // style = {advertiser.advertiser[0].isAccepted === false ? { backgroundColor: 'orange' } : { backgroundColor: 'initial' }}
             >
                 <td>{advertiser.firstName}</td>
                 <td>{advertiser.lastName}</td>

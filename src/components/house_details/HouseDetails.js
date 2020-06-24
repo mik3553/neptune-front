@@ -60,7 +60,7 @@ export default class HouseDetails extends Component {
             this.setState({ noUser: 'Ajoutée à votre favoris avec succé' });
         }else if (response.status === 204) {
             this.setState({noUser : 'Existe déja dans vos favoris'});
-        }else if (response.status == 403){
+        }else if (response.status === 403){
             this.setState({ noUser: 'Veuillez vous authentifier svp !' });
         }else {
             this.setState({ noUser: 'probléme avec la maison d\'hote' });

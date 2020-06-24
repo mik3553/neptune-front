@@ -47,7 +47,7 @@ export default class Comments extends Component {
                     key={comment._id}
                     className='comment-details'
                 >
-                    <span>le : {comment_creation_date}</span>
+                    <span className='comment-span'>le : {comment_creation_date}</span>
                     <span>de : {comment.user_id.firstName}</span>
                     <p>{comment.comment}</p>
                 </div> 
