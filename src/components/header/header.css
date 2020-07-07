@@ -3,10 +3,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
+    position: fixed;
+    top: 0;
     left:0;
     right: 0;
     z-index: 100;
+    transition: opacity 2.5s ;
+
 }
 .header h1 {
     background: -webkit-linear-gradient(90deg, rgba(255,255,255,1) 0%, #00d4ff 100%);
@@ -38,6 +41,10 @@
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
+.scroll {
+  opacity: 0.5;
+  transition: opacity 3s;
+}
 .navbar {
     position: fixed;
     top : 3.45rem;
@@ -47,7 +54,7 @@
     transition: right 0.5s;
 }
 .navbar.nav-open {
-  right: 0;
+  right: 0rem;
 }
 .navbar li {
     text-align: left;

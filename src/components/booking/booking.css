@@ -1,14 +1,36 @@
-.booking {
-    margin: 1rem 0.5rem;
-    padding-bottom: 1rem;
+.finalize {
+    margin-top: 6rem;
+    margin-bottom: 3rem;
 }
+/* .booking {
+    width: 80%;
+    margin: 1rem auto;
+    padding-bottom: 1rem;
+} */
+/* .booking input {
+    margin: 0.5rem auto;
+} */
 .date {
     display:flex;
-    justify-content: space-around;
+    justify-content: space-between;
     /* flex-direction: row; */
 }
-.nbrOfPersons {
-    width: 5rem;
+.datepicker {
+    width:6rem;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    
+}
+
+.nbrOfPersons input {
+    margin:0;
+    margin: 0.5rem 0;
+    width: 6rem;
+    display: block;
+    border-top: none;
+    border-left: none;
+    border-right: none;
 }
 .finalize section {
     width: 20rem;
@@ -27,4 +49,42 @@
     display: block;
     width: 10rem;
     margin: 1rem auto;
+}
+
+/* .booking input:invalid+span:after {
+  content: '✖';
+  padding-left: 5px;
+}
+
+.booking input:valid+span:after {
+  content: '✓';
+  padding-left: 5px;
+} */
+
+.disabled-date {
+  pointer-events: none;
+  color: red;
+}
+
+
+@media screen and (min-width: 800px){
+    .date {
+        display:flex;
+        justify-content: space-between;
+        /* flex-direction: row; */
+    }
+    .departure {
+        margin: 0 4rem 0 0;
+    }
+    .nbrOfPersons input {
+        margin:0;
+        margin: 0.5rem 0;
+        width: 6rem;
+        display: initial;
+        margin-left: 1rem;
+    }
+    .nbrOfPersons {
+        /* text-align: center; */
+    }
+ 
 }

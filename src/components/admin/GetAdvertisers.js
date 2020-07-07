@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from 'react';
+import React  from 'react';
 import formDate from '../../utils/formatDate'
 
 const GetAdvertisers = ({ advertiser, deleteUser, btn, index, checkHouse, validateHouse }) => {

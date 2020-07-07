@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import DecodedContext from '../src/components/Context/Decoded';
 
 import './App.css'
 import LandingPage from './components/landingPage/LandingPage'
@@ -14,17 +16,19 @@ import * as serviceWorker from './serviceWorker';
 
 const Routes = () => {
         return (
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path='/' component={LandingPage} />
-                    <Route path='/register' component={LoginPage} />
-                    <Route path='/mon_compte' component={MyProfile} />
-                    <Route path='/house_details/:id' component={HouseDetails} />
-                    <Route path='/contact' component={Contact} />
-                    <Route path='/reservation' component={Finalize} />
-                    <Route path='/admin' component={Admin} />
-                </Switch>
-            </BrowserRouter>
+            <DecodedContext>
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path='/' component={LandingPage} />
+                        <Route path='/register' component={LoginPage} />
+                        <Route path='/mon_compte' component={MyProfile} />
+                        <Route path='/house_details/:id' component={HouseDetails} />
+                        <Route path='/contact' component={Contact} />
+                        <Route path='/reservation' component={Finalize} />
+                        <Route path='/admin' component={Admin} />
+                    </Switch>
+                </BrowserRouter>
+            </DecodedContext>
         )
 }
 

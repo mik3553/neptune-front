@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import Header from '../header/Header'
 import Footer from '../footer/Footer'
-import AwesomeSlider from 'react-awesome-slider';
+
+import 'antd/dist/antd.css';
+import { Carousel } from 'antd';
+
 import Comments from './Comments';
 import AddComment from './AddComment';
 import Booking from '../booking/Booking';
@@ -72,10 +75,11 @@ export default class HouseDetails extends Component {
 
             const images = [...this.state.images]
                 .map(photo =>
-                    <div
+                    <img
+                        alt= {photo}
                         className='image-slide'
                         key={photo}
-                        data-src={`http://localhost:4000/${photo}`} />
+                        src={`http://localhost:4000/${photo}`} />
                 )
             const services = [...this.state.services]
             .map(service => (
@@ -95,31 +99,39 @@ export default class HouseDetails extends Component {
                     <main>
                         <section className='house-details-page'>
                             <figure>
-                                <AwesomeSlider
-                                    className='slider'>
+                                <Carousel
+                                    autoplay
+                                >
                                     {images}
-                                </AwesomeSlider>
-                                <h2>{details.title}</h2>
-                                <figcaption>{details.description}</figcaption>
-                                <div className='localisation'>
-                                    <p>Adresse :</p>
-                                    <p>{details.adress}</p>
-                                    <p>{details.zipcode}</p>
-                                    <p>{details.department}</p>
-                                </div>
+                                </Carousel>
+                               
                                 <div className='house-details-page-service'>
+                                    <h2>{details.title}</h2>
+                                    <figcaption>{details.description}</figcaption>
+                                    <div className='localisation'>
+                                        <div>
+                                            <p>Adresse :</p>
+                                            <p>{details.adress}</p>
+                                            <p>{details.zipcode}</p>
+                                            <p>{details.region}</p>
+                                        </div>
+                                        <div className='favoris'>
+                                            <img
+                                                onClick={this.addTowhishList}
+                                                src={require('../../images/fav.jpeg')}
+                                                alt='button favoris'
+                                                title='ajouter au favoris'
+                                            />
+                                            <span style={{ color: 'red', fontSize: '0.7em', marginTop: '-0.5rem' }}>
+                                                {this.state.noUser != null ? this.state.noUser : null}
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div>
-                                        <p>nombre de chambes:{details.nbrOfRooms}</p>
-                                        <p>nombre de lits:{details.nbrOfBeds}</p>
-                                        <span>Note : {details.rating}/5</span>
-                                        <img 
-                                            onClick={this.addTowhishList}
-                                            src={require('../../images/fav.jpeg')}
-                                            alt='button favoris'
-                                            title='ajouter au favoris'/>
-                                        <span style={{color:'red', fontSize : '0.7em', marginTop: '-0.5rem'}}>
-                                            {this.state.noUser != null ? this.state.noUser : null}
-                                        </span>
+                                        <p>nombre de chambes: {details.nbrOfRooms}</p>
+                                        <p>nombre de lits: {details.nbrOfBeds}</p>
+                                        {/* <span>Note : {details.rating}/5</span> */}
+                                        
                                     </div>
                                     <div>
                                         <p>Services :</p>

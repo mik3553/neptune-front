@@ -1,3 +1,7 @@
+.landin-page {
+    margin-top: 3rem;
+}
+
 .landin-page h3 {
     color: white;
 }
@@ -11,6 +15,9 @@
     align-items: flex-end;
     justify-content: center;
     /* box-shadow: ; */
+}
+.select {
+    margin-bottom: 2rem;
 }
 .landin-page-bg input {
     margin-bottom: 0.5rem;
