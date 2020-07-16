@@ -90,10 +90,10 @@ class Booking extends Component {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         };
-        const response = await fetch(`http://localhost:4000/booking`, options);
+        const response = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/booking`, options);
         if (response.status === 201) {
             const jsonData = await response.json();
-            console.log(jsonData)
+           
             this.setState({
                 errors : [],
                 arrival:'',
@@ -157,7 +157,6 @@ class Booking extends Component {
             return datesArray;
 
         }
-        console.log((elementsCss(bookedDates).toString())) ; 
         
         return (
             <form 

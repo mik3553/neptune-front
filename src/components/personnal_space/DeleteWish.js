@@ -16,7 +16,7 @@ export default function DeleteWish({wish_id, reference,index}) {
                 'authorization': `bearer ${localStorage.getItem('token')}`
             }
         }
-        const response = await fetch(`http://localhost:4000/whishList`, options);
+        const response = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/whishList`, options);
         const jsonData = await response.json();
         console.log(jsonData);
         // supprimer le visu

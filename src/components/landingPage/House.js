@@ -20,7 +20,7 @@ class House extends Component {
 
         const requireImage = (chemin) => {
             try {
-                return (`http://localhost:4000/${chemin}`)
+                return (`https://neptune-back.abdelkrim-sahraoui.com/${chemin}`)
             }
             catch (err) {
                 return require(`../../images/background.jpg`)

@@ -1,6 +1,4 @@
-/* .register-user {
-    
-} */
+
 .register-user strong {
     display: block;
     text-align: center;
@@ -61,9 +59,18 @@
     display: block;
     width: auto;
     margin: 2rem auto;
+    margin-top: 5.1rem;
+}
+
+.ant-alert-with-description  {
+    width: 20rem;
 }
 
 @media screen and (min-width: 800px){
+
+    .register-user {
+        margin: 12rem auto;
+    }
     .register-user-section{
         width: 95%;
         margin: auto;
@@ -84,6 +91,7 @@
         margin: auto;
     }
     .advertiser-forms {
+        /* margin-top: 6.1rem; */
         display: flex;
         width: 100%;
     }

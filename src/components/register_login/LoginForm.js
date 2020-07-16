@@ -26,12 +26,12 @@ class LoginForm extends Component {
                     'Content-type': 'application/x-www-form-urlencoded'
                 }
             }
-            fetch('http://localhost:4000/login', options)
+            fetch('https://neptune-back.abdelkrim-sahraoui.com/login', options)
             .then(response => {
                 if(response.status === 200){
                     response.json()
                     .then(response =>{
-                        console.log(response);
+                        
                         localStorage.setItem('token', response.token);
                         setTimeout(() => {
                            localStorage.removeItem('token');

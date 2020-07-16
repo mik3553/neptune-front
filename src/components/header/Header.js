@@ -24,39 +24,38 @@ class Header extends Component {
             this.getDecode();
         }
         window.addEventListener('scroll', this.onScroll);
-        // const { decoded } = this.state;
-        // const now = Date.now();
-        // if (decoded.exp > now)
-        //     localStorage.removeItem("token")
     }
     componentWillUnmount(){
         window.removeEventListener('scroll', this.onScroll);
     }
     // componentDidUpdate(prevProps, prevState){
-    //     if(prevProps !== this.props || this.state !== prevState){
-    //         this.getDecode();
+    //     if(prevState.decoded.exp !== this.state.decoded.exp){
+    //         const { decoded } = this.state;
+    //         const now = Date.now();
+    //         if (decoded.exp > now)
+    //             localStorage.removeItem("token");
     //     }
+    //     console.log(prevState)
     // }
     getDecode = async () => {
-            let options = {
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/x-www-form-urlencoded',
-                    'Authorization': `bearer ${this.state.token}`
-                }
+        let options = {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded',
+                'Authorization': `bearer ${this.state.token}`
             }
-            let response = await fetch(`http://localhost:4000/authApp`, options);
-            console.log(response)
-            if(response.status === 200) {
-                let jsonData = await response.json();
-                this.setState({
-                    decoded : jsonData
-                })
-            } else {
-                this.setState({
-                    token : null
-                })
-            }
+        }
+        let response = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/authApp`, options);
+        
+        if(response.status === 200) {
+            let jsonData = await response.json();
+            this.setState({
+                decoded : jsonData
+            })
+            // console.log(this.state.decoded);
+        } else {
+            localStorage.removeItem('token');
+        }
     }
     handleClick = () =>{
         const wrapper = this.warapperRef.current;
@@ -78,11 +77,11 @@ class Header extends Component {
                 'Authorization': `bearer ${this.state.token}`
             }
         }
-        const response = await fetch(`http://localhost:4000/token`, options);
-        console.log(response)
+        const response = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/token`, options);
+        // console.log(response)
         if(response.status === 201){
-            const jsonData = await response.json();
-            console.log(jsonData)
+            // const jsonData = await response.json();
+            // console.log(jsonData)
             localStorage.removeItem("token")
             this.props.history.push({
                 pathname: `/register`
@@ -96,7 +95,7 @@ class Header extends Component {
         if(window.scrollY > position){
             scroll.classList.add('scroll');
         }else {
-                scroll.classList.remove('scroll');
+            scroll.classList.remove('scroll');
         }
     }
     render() {
@@ -107,7 +106,7 @@ class Header extends Component {
         }
         // let logOut = null
         if (this.state.token !== null) {
-            logOut = <li onClick={this.logOut}><Link to='/register'>Deconnexion</Link></li>
+            logOut = <li onClick={this.logOut}><Link to='/register'>Se déconnecter</Link></li>
         }
 
         return (
@@ -129,14 +128,12 @@ class Header extends Component {
                             ref={this.warapperRef}
                             className='navbar'>
                             <ul className='navbar-ul'>
-                                {logOut}
                                 {/* {logIn} */}
-                                <li>
-                                    <Link to='/mon_compte'>Mon compte</Link>
-                                </li>
                                 <li>
                                     <Link to='/contact'>Contact</Link>
                                 </li>
+                                {this.state.token !== null ? <li><Link to='/mon_compte'>Mon compte</Link></li> : null}
+                                {logOut}
                             </ul>
                         </nav>
                     </header>

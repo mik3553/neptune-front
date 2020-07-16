@@ -21,11 +21,10 @@ export default class PersonalInformations extends Component {
             
         }
         if(localStorage.getItem('token') !== null){
-            fetch(`http://localhost:4000/houseBookings`, options)
+            fetch(`https://neptune-back.abdelkrim-sahraoui.com/houseBookings`, options)
                 .then(response => {
                     response.json()
                         .then(response => {
-                            console.log(response)
                             // let bookings = [...this.state.bookings, response];
                             this.setState({ bookings: response })
                         })
@@ -54,7 +53,6 @@ export default class PersonalInformations extends Component {
                 />
             ))
         }
-        console.log(this.state.bookings)
         return (
             <article className='houseBookings'>
                 <h2>Réservations clients</h2>

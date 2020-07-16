@@ -20,7 +20,6 @@ class MyProfile extends Component {
     }
     componentDidMount(){
         this.getUser();
-        console.log(localStorage.getItem('token'))
     }
     abortController = new AbortController();
     getUser = () =>{
@@ -32,7 +31,7 @@ class MyProfile extends Component {
                 'Authorization' : `bearer ${localStorage.getItem('token')}`
             }
         }
-        fetch('http://localhost:4000/user_profile', options)
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/user_profile', options)
         .then(response => {
             if (response.status === 200){
                 response.json()
@@ -65,7 +64,7 @@ class MyProfile extends Component {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         }
-        fetch('http://localhost:4000/user', options)
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/user', options)
             .then(response => {
                 console.log(response.status)
                 if (response.status === 200) {

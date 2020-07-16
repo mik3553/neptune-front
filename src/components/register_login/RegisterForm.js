@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Alert } from 'antd';
 
 export default class RegisterForm extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ export default class RegisterForm extends Component {
             errorSubmit: '',
             emailError: false,
             passwordError : false,
-            nameError : false
+            nameError : false,
+            alert : false
         }
     }
     handleChange = (event) => {
@@ -29,18 +31,18 @@ export default class RegisterForm extends Component {
                     'Content-type': 'application/x-www-form-urlencoded'
                 }
             }
-            fetch('http://localhost:4000/registerUser', options)
+            fetch('https://neptune-back.abdelkrim-sahraoui.com/registerUser', options)
                 .then(response => {
                     if (response.status === 201) {
                         response.json()
                         .then(response => {
-                            console.log(response)
+                            
                             let resetForm = this.state
                             Object.keys(resetForm)
                             .forEach(item =>{
                                 resetForm[item]=''
                             })
-                            this.setState({ ...resetForm, errorSubmit:'félicitation votre compte est crée !'})
+                            this.setState({ ...resetForm, alert:true})
                         })
                     }
                     else if (response.status === 204){
@@ -104,6 +106,16 @@ export default class RegisterForm extends Component {
         if (this.state.passwordError){
             passwordError = <li className='error'>Veuillez saisir un mot de passe avec au minimun 8 charactéres, une majuscule et une miniscule</li>
         }
+
+        let alert = null;
+        if(this.state.alert){
+            alert = <Alert
+                message="Compte crée"
+                description="Félicitation votre compte est crée, vous pouvez vous connecter"
+                type="success"
+                showIcon
+            />
+        }
         return (
             <form onSubmit={this.handleSubmit} className='form'>
                 <div className='fieldset'>
@@ -147,6 +159,7 @@ export default class RegisterForm extends Component {
                         onChange={this.handleChange} />
                 </div>
                 <input type='submit' />
+                {alert}
                 <ol>
                     {nameError}
                     {emailError}

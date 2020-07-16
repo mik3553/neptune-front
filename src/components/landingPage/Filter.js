@@ -6,17 +6,22 @@ export default class Filter extends Component {
 
     constructor(props) {
         super(props)
-        const filter = this.props.filter;
         this.wrapperFilterRef = React.createRef();
+
+        const services = this.props.services
     }
 
     state = {
         animals : false,
-        breakfast : false,
-        landry : false,
-        wi_fi:false,
-        swimingPool : false
+        breakfast: false,
+        landry: false,
+        wi_fi: false,
+        swimingPool: false
     }
+
+    // componentDidUpdate(prevProps, presvState){
+    //     if(prevProps.services == )
+    // }
 
     handleCheck = (event) => {
         let {name, checked} = event.target;
@@ -32,7 +37,8 @@ export default class Filter extends Component {
    
     
     render() {
-        const {breakfast, wi_fi, landry, swimingPool, animals} = this.state;
+        const services = this.props.services
+
         return (
             <section
                 ref={this.wrapperFilterRef}
@@ -41,13 +47,13 @@ export default class Filter extends Component {
                 <div>
                     <h3>Filtre</h3>
                     <form 
-                        onSubmit={(event)=>this.props.filter(event,animals, breakfast, landry, wi_fi, swimingPool)}
+                        onSubmit={(event)=>this.props.filter(event)}
                         className='filtre'>
                         <fieldset>
                             <label>wi_fi</label>
                             <input
                                 name='wi_fi'
-                                value={this.state.wi_fi}
+                                value={services.wi_fi}
                                 onClick={this.handleCheck}
                                 type='checkbox' />
 
@@ -56,7 +62,7 @@ export default class Filter extends Component {
                             <label>Restauration</label>
                             <input
                                 name='breakfast'
-                                value={this.state.breakfast}
+                                value={services.breakfast}
                                 onClick={this.handleCheck} 
                                 type='checkbox' />
 
@@ -65,7 +71,7 @@ export default class Filter extends Component {
                             <label>piscine</label>
                             <input
                                 name='swimingPool'
-                                value={this.state.swimingPool}
+                                value={services.swimingPool}
                                 onClick={this.handleCheck} 
                                 type='checkbox' />
                         </fieldset>
@@ -73,7 +79,7 @@ export default class Filter extends Component {
                             <label>Blanchisserie</label>
                             <input
                                 name='landry'
-                                value={this.state.landry}
+                                value={services.landry}
                                 onClick={this.handleCheck} 
                                 type='checkbox' />
                         </fieldset>
@@ -81,7 +87,7 @@ export default class Filter extends Component {
                             <label>Animaux</label>
                             <input
                                 name='animals'
-                                value={this.state.animals}
+                                value={services.animals}
                                 onClick={this.handleCheck} 
                                 type='checkbox' />
                         </fieldset>

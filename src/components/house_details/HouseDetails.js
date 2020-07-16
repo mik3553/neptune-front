@@ -18,7 +18,7 @@ export default class HouseDetails extends Component {
         this.state = {
             details : {},
             images : [],
-            services : [],
+            services : {},
         }
     }
     
@@ -32,7 +32,7 @@ export default class HouseDetails extends Component {
                 'Content-type': 'application/x-www-form-urlencoded'
             }
         };
-        const response     = await fetch(`http://localhost:4000/house/${this.props.match.params.id}`, options);
+        const response     = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/house/${this.props.match.params.id}`, options);
         const jsonData     = await response.json();
         const dataImage    = await jsonData.images;
         const dataServices = await jsonData.services; 
@@ -56,7 +56,7 @@ export default class HouseDetails extends Component {
                 'Authorization' : `bearer ${localStorage.getItem('token')}`
             }
         };
-        const response = await fetch(`http://localhost:4000/whishList`, options);
+        const response = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/whishList`, options);
         if(response.status === 201){
             // const jsonData = await response.json();
             // console.log(jsonData);
@@ -79,19 +79,10 @@ export default class HouseDetails extends Component {
                         alt= {photo}
                         className='image-slide'
                         key={photo}
-                        src={`http://localhost:4000/${photo}`} />
+                        src={`https://neptune-back.abdelkrim-sahraoui.com/${photo}`} />
                 )
-            const services = [...this.state.services]
-            .map(service => (
-                <ul
-                    key={service._id}
-                >
-                    {service.breakfast ? <li>Repas</li> : null}
-                    {service.landry ? <li>Blanchisserie</li> : null}
-                    {service.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
-                    {service.wi_fi ? <li>Wi-fi/Internet</li> : null}
-                </ul>
-            ))
+            const service = this.state.services;
+          
                 
             return (
                 <Fragment>
@@ -135,7 +126,13 @@ export default class HouseDetails extends Component {
                                     </div>
                                     <div>
                                         <p>Services :</p>
-                                            {services}
+                                        <ul>
+                                            {service.wi_fi ? <li>Wi-fi/Internet</li> : null}
+                                            {service.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
+                                            {service.breakfast ? <li>Repas</li> : null}
+                                            {service.landry ? <li>Blanchisserie</li> : null}
+                                            {service.swimingPool ? <li>Piscine</li> : null}
+                                        </ul>
                                         <span>Prix par personne: {details.price} euros</span>
                                     </div>
                                 </div>

@@ -26,7 +26,7 @@ export default class Comments extends Component {
                 'Content-type': 'application/x-www-form-urlencoded'
             }
         };
-        const response = await fetch('http://localhost:4000/comments', options);
+        const response = await fetch('https://neptune-back.abdelkrim-sahraoui.com/comments', options);
         const jsonData = await response.json();
 
         this.setState({

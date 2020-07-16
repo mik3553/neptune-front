@@ -15,9 +15,9 @@
   background: #364d79;
   overflow: hidden;
 }
-.ant-rate {
+/* .ant-rate {
     margin-right: 1rem;
-}
+} */
 .image-slide {
     height: 15rem;
 }
@@ -29,6 +29,10 @@
     border: 1px solid rgba(1, 1, 65, 0.876);
     padding: 0.5rem;
 }
+/* .ant-rate .ant-rate-disabled {
+    color : blue;
+    color: red ;
+} */
 .localisation div {
     width: 50%;
 }

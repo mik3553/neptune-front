@@ -4,6 +4,11 @@
     margin: 1rem auto;
     box-shadow: 0 5px 8px 0 grey;
     transition: 0.7s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: flex-end; */
+    /* vertical-align: bottom; */
 }
 .house:hover{
     transform: scale(1.03);
@@ -38,6 +43,7 @@
     padding: 0.5rem;
     color : grey;
     font-size: 1.2em;
+    /* height: 4rem; */
 }
 
 .house-details {
@@ -45,12 +51,16 @@
     flex-direction: column;
     width: 60%;
     margin: 1rem auto ;
+    /* margin-top: 3rem; */
     padding-bottom: 1rem;
+    /* vertical-align: baseline; */
+    /* position: absolute; */
+    
 }
 .house-details div {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
 }
 .house-span {
     color: #00d4ff;
@@ -61,7 +71,6 @@
     /* color: #00d4ff; */
 }
 
-
 .house-details ul {
   margin-left: 1rem;
 }
@@ -70,7 +79,7 @@
 @media screen and (min-width: 800px) and (max-width: 1100px){
  
     .house {
-        width: 18rem;
+        width: 18.5rem;
         margin: 1rem auto;
     }
  
@@ -78,8 +87,9 @@
 @media screen and (min-width: 1100px){
 
     .house {
-        width: 18rem;
+        width: 18.5rem;
         margin: 1rem auto;
     }
+    
 }
 

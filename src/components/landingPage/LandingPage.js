@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import House from './House';
-import Filter from './Filter';
+// import Filter from './Filter';
 
 import { Button, Tooltip, Select } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
@@ -20,14 +20,21 @@ export default class LandingPage extends Component {
         this.state = {
             houses : [],
             region : '',
-            noHouses : null
+            noHouses : null,
+            services : {
+                animals: false,
+                breakfast: false,
+                landry: false,
+                wi_fi: false,
+                swimingPool: false
+            }
         }
     }
     componentDidMount(){
         this.getHouses();
     }
     getHouses = () => {
-        fetch('http://localhost:4000/houses', {methode : 'GET'})
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/houses', {methode : 'GET'})
         .then(response => {
             response.json()
             .then(response =>{
@@ -35,30 +42,39 @@ export default class LandingPage extends Component {
             });
         })
     }
-    filter = (event, animals, breakfast, landry, wi_fi, swimingPool) => {
+    filter = (event) => {
         event.preventDefault();
         let options = {
             method: 'POST',
             body: new URLSearchParams({
-                animals: animals,
-                breakfast: breakfast,
-                landry: landry,
-                wi_fi: wi_fi,
-                swimingPool: swimingPool
+                animals: this.state.services.animals,
+                breakfast: this.state.services.breakfast,
+                landry: this.state.services.landry,
+                wi_fi: this.state.services.wi_fi,
+                swimingPool: this.state.services.swimingPool
             })
         }
-        fetch('http://localhost:4000/filter', options)
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/filter', options)
         .then(response => {
-            response.json()
-            .then(response => {
-                console.log( response)
-            })
+            if(response.status === 200){
+                response.json()
+                .then(response => {
+                    console.log(response)
+                    this.setState({houses : response})
+                })
+            }
         })
+        const {services} = this.state;
+        let serviceArray = Object.keys(services)
+        serviceArray.forEach(service => {
+            serviceArray[service] = false
+        })
+        this.setState({services : serviceArray})
     }
     getHousesByRegion = (event) => {
         event.preventDefault();
         if (this.state.region !== '' ){
-            fetch('http://localhost:4000/house/searchBar/'+this.state.region, {method : 'GET'})
+            fetch('https://neptune-back.abdelkrim-sahraoui.com/house/searchBar/'+this.state.region, {method : 'GET'})
             .then(response => {
                 // console.log(response)
                 if(response.status === 200) {
@@ -193,9 +209,10 @@ export default class LandingPage extends Component {
                         </div>
                         <div className='landin-page-sections'>
 
-                            <Filter 
+                            {/* <Filter 
                                 filter={this.filter}
-                            />
+                                services={this.state.services}
+                            /> */}
                             <section className='landin-page-houses'>
                                 <p>{noHouses}</p>
                                 {houses}

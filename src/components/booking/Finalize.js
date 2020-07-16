@@ -41,7 +41,6 @@ export default class Finalize extends Component {
     render() {
         const recap = {...this.state.recap};
         // const booking_details = recap.booking_details_id;
-        console.log(recap)
         return (
             <Fragment>
                 <Header />

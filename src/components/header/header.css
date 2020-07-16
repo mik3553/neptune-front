@@ -11,6 +11,13 @@
     transition: opacity 2.5s ;
 
 }
+
+header a {
+  color: white;
+}
+.header:hover {
+  background-color: #090979 !important;
+}
 .header h1 {
     background: -webkit-linear-gradient(90deg, rgba(255,255,255,1) 0%, #00d4ff 100%);
     background-clip: text;
@@ -47,18 +54,28 @@
 }
 .navbar {
     position: fixed;
-    top : 3.45rem;
+    top : 4.1rem;
     background-color: #090979;
-    right: -7rem;
-    width: 6.7rem;
+    right: -8rem;
+    width: 8rem;
     transition: right 0.5s;
 }
+
+.navbar-ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  transition: opacity 2.5s ;
+  /* margin-bottom: 0; */
+  /* width: 50rem; */
+}
+
 .navbar.nav-open {
-  right: 0rem;
+  right: 0;
 }
 .navbar li {
     text-align: left;
-    margin: 1rem 0 1rem 1rem;
+    margin: 1rem 0 0 1rem;
     color: white;
     transition: 0.4s;
 }
@@ -84,6 +101,8 @@
     }
     .navbar-ul {
       display: flex;
-      justify-content: space-between;
+      flex-direction: row;
+      /* justify-content: space-between; */
+      transition: opacity opacity 2.5s ;
     }
 }

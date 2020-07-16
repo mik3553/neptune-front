@@ -35,7 +35,7 @@ export default class Contact extends Component {
                 'Content-type': 'application/x-www-form-urlencoded',
             }
         };
-        fetch(`http://localhost:4000/contact`, options)
+        fetch(`https://neptune-back.abdelkrim-sahraoui.com/contact`, options)
         .then(response => {
             console.log(response)
             if(response.status === 201){
