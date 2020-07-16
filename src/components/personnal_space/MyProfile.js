@@ -16,12 +16,10 @@ class MyProfile extends Component {
             user:{},
             userHouse:[],
             userWishList:[],
-            decoded : {}
         }
     }
     componentDidMount(){
         this.getUser();
-        console.log(localStorage.getItem('token'))
     }
     abortController = new AbortController();
     getUser = () =>{
@@ -33,14 +31,13 @@ class MyProfile extends Component {
                 'Authorization' : `bearer ${localStorage.getItem('token')}`
             }
         }
-        fetch('http://localhost:4000/user_profile', options)
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/user_profile', options)
         .then(response => {
             if (response.status === 200){
                 response.json()
                 .then(response => {
-                    console.log(response)
+                
                     this.setState({
-                        decoded : response.decoded,
                         user: response.user,
                         userHouse    : response.user.advertiser,
                         userWishList : response.user.wishList
@@ -67,7 +64,7 @@ class MyProfile extends Component {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         }
-        fetch('http://localhost:4000/user', options)
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/user', options)
             .then(response => {
                 console.log(response.status)
                 if (response.status === 200) {
@@ -84,15 +81,8 @@ class MyProfile extends Component {
 
     render() {
     
-        const { user, userWishList, decoded} = this.state;
-        let date = new Date();
-        let getTime = date.getTime()
-        console.log(getTime);
-        if(getTime > decoded.exp){
-            console.log('pas encore heur')
-        }else {
-            console.log('detruit')
-        }
+        const { user, userWishList} = this.state;
+      
         const houseInformation = [...this.state.userHouse]
         .map(item => (
             <HouseInformations
@@ -103,23 +93,24 @@ class MyProfile extends Component {
         return (
             <Fragment>
                 <Header />
-                <section className='myprofile'>
-                    <PersonalInformations
-                        user={user}
-                        wishList={userWishList}
-                    />
-                    {houseInformation}
+                <main>
+                    <section className='myprofile'>
+                        <PersonalInformations
+                            user={user}
+                            wishList={userWishList}
+                        />
+                        {houseInformation}
 
-                    <HouseBookings />
-                    
-                    <button
-                        className='deleteAccount'
-                        onClick={this.deleteAccount}
-                    >
-                        supprimer mon compte
-                    </button>
-
-                </section>
+                        <HouseBookings />
+                        
+                        <button
+                            className='deleteAccount'
+                            onClick={this.deleteAccount}
+                        >
+                            supprimer mon compte
+                        </button>
+                    </section>
+                </main>
                 <Footer />
             </Fragment>
         )

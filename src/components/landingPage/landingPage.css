@@ -1,3 +1,7 @@
+.landin-page {
+    margin-top: 4.1rem;
+}
+
 .landin-page h3 {
     color: white;
 }
@@ -10,6 +14,9 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
+}
+.select {
+    margin-bottom: 2rem;
 }
 .landin-page-bg input {
     margin-bottom: 0.5rem;
@@ -34,7 +41,7 @@
         width: 15rem;
     }
     .landin-page-sections {
-        width: 50rem;
+        width: 45rem;
         display: flex;
         justify-content: space-between;
         padding: 1rem;
@@ -45,6 +52,7 @@
        display: flex;
        flex-wrap: wrap;
        width: 40rem;
+       margin: auto;
        /* justify-content: center; */
     }
     
@@ -60,7 +68,7 @@
     .landin-page-sections {
         display: flex;
         justify-content: space-between;
-        width: 70rem;
+        width: 65rem;
         margin: 3rem auto;
         padding: 1rem;
         box-shadow: 0 5px 8px 0 grey;
@@ -69,6 +77,7 @@
        display: flex;
        flex-wrap: wrap;
        width: 60rem;
+       margin: auto;
        /* justify-content: center; */
     }
     

@@ -62,11 +62,11 @@ export default class Admin extends Component {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }
             };
-            const response = await fetch('http://localhost:4000/messages', options);
+            const response = await fetch('https://neptune-back.abdelkrim-sahraoui.com/messages', options);
             if (response.status === 200) {
                 const jsonResponse = await response.json();
                 this.setState({messages : jsonResponse})
-                console.log(jsonResponse);
+               
                 this.setState({ isAuthorised: true });
             } else {
                 this.setState({ isAuthorised: false });
@@ -84,10 +84,10 @@ export default class Admin extends Component {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }
             };
-            const response = await fetch('http://localhost:4000/countMessage', options);
+            const response = await fetch('https://neptune-back.abdelkrim-sahraoui.com/countMessage', options);
             if (response.status === 200) {
                 const jsonResponse = await response.json();
-                console.log(jsonResponse);
+               
                 this.setState({ countMessage: jsonResponse })
                 this.setState({ isAuthorised: true });
             } else {
@@ -108,9 +108,8 @@ export default class Admin extends Component {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }
             };
-            const response = await fetch('http://localhost:4000/users', options);
+            const response = await fetch('https://neptune-back.abdelkrim-sahraoui.com/users', options);
             if (response.status === 200) {
-                console.log("hello admin");
                 const jsonResponse = await response.json();
                 jsonResponse.forEach(user => {
                     if(user.role === 1){
@@ -138,7 +137,7 @@ export default class Admin extends Component {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         }
-        fetch('http://localhost:4000/deleteUser', options);
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/deleteUser', options);
         //supprimer le visu 
         this.btn[index].classList.add('displayNone');
     }
@@ -160,7 +159,7 @@ export default class Admin extends Component {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         }
-        fetch('http://localhost:4000/validateHouse', options)
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/validateHouse', options)
         .then(response => {
             if(response.status === 200){
                 // this.setState({toogleValidateHouse : true})
@@ -192,7 +191,7 @@ export default class Admin extends Component {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         }
-        fetch('http://localhost:4000/opened', options)
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/opened', options)
             // .then(response => {
 
             //     if (response.status === 200) {
@@ -216,7 +215,7 @@ export default class Admin extends Component {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         }
-        fetch('http://localhost:4000/deleteMessage', options)
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/deleteMessage', options)
         // .then(response => {
 
         //     if (response.status === 200) {

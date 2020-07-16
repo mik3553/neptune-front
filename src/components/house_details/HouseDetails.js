@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import Header from '../header/Header'
 import Footer from '../footer/Footer'
-import AwesomeSlider from 'react-awesome-slider';
+
+import 'antd/dist/antd.css';
+import { Carousel } from 'antd';
+
 import Comments from './Comments';
 import AddComment from './AddComment';
 import Booking from '../booking/Booking';
@@ -15,7 +18,7 @@ export default class HouseDetails extends Component {
         this.state = {
             details : {},
             images : [],
-            services : [],
+            services : {},
         }
     }
     
@@ -29,7 +32,7 @@ export default class HouseDetails extends Component {
                 'Content-type': 'application/x-www-form-urlencoded'
             }
         };
-        const response     = await fetch(`http://localhost:4000/house/${this.props.match.params.id}`, options);
+        const response     = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/house/${this.props.match.params.id}`, options);
         const jsonData     = await response.json();
         const dataImage    = await jsonData.images;
         const dataServices = await jsonData.services; 
@@ -53,7 +56,7 @@ export default class HouseDetails extends Component {
                 'Authorization' : `bearer ${localStorage.getItem('token')}`
             }
         };
-        const response = await fetch(`http://localhost:4000/whishList`, options);
+        const response = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/whishList`, options);
         if(response.status === 201){
             // const jsonData = await response.json();
             // console.log(jsonData);
@@ -72,22 +75,14 @@ export default class HouseDetails extends Component {
 
             const images = [...this.state.images]
                 .map(photo =>
-                    <div
+                    <img
+                        alt= {photo}
                         className='image-slide'
                         key={photo}
-                        data-src={`http://localhost:4000/${photo}`} />
+                        src={`https://neptune-back.abdelkrim-sahraoui.com/${photo}`} />
                 )
-            const services = [...this.state.services]
-            .map(service => (
-                <ul
-                    key={service._id}
-                >
-                    {service.breakfast ? <li>Repas</li> : null}
-                    {service.landry ? <li>Blanchisserie</li> : null}
-                    {service.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
-                    {service.wi_fi ? <li>Wi-fi/Internet</li> : null}
-                </ul>
-            ))
+            const service = this.state.services;
+          
                 
             return (
                 <Fragment>
@@ -95,35 +90,49 @@ export default class HouseDetails extends Component {
                     <main>
                         <section className='house-details-page'>
                             <figure>
-                                <AwesomeSlider
-                                    className='slider'>
+                                <Carousel
+                                    autoplay
+                                >
                                     {images}
-                                </AwesomeSlider>
-                                <h2>{details.title}</h2>
-                                <figcaption>{details.description}</figcaption>
-                                <div className='localisation'>
-                                    <p>Adresse :</p>
-                                    <p>{details.adress}</p>
-                                    <p>{details.zipcode}</p>
-                                    <p>{details.department}</p>
-                                </div>
+                                </Carousel>
+                               
                                 <div className='house-details-page-service'>
+                                    <h2>{details.title}</h2>
+                                    <figcaption>{details.description}</figcaption>
+                                    <div className='localisation'>
+                                        <div>
+                                            <p>Adresse :</p>
+                                            <p>{details.adress}</p>
+                                            <p>{details.zipcode}</p>
+                                            <p>{details.region}</p>
+                                        </div>
+                                        <div className='favoris'>
+                                            <img
+                                                onClick={this.addTowhishList}
+                                                src={require('../../images/fav.jpeg')}
+                                                alt='button favoris'
+                                                title='ajouter au favoris'
+                                            />
+                                            <span style={{ color: 'red', fontSize: '0.7em', marginTop: '-0.5rem' }}>
+                                                {this.state.noUser != null ? this.state.noUser : null}
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div>
-                                        <p>nombre de chambes:{details.nbrOfRooms}</p>
-                                        <p>nombre de lits:{details.nbrOfBeds}</p>
-                                        <span>Note : {details.rating}/5</span>
-                                        <img 
-                                            onClick={this.addTowhishList}
-                                            src={require('../../images/fav.jpeg')}
-                                            alt='button favoris'
-                                            title='ajouter au favoris'/>
-                                        <span style={{color:'red', fontSize : '0.7em', marginTop: '-0.5rem'}}>
-                                            {this.state.noUser != null ? this.state.noUser : null}
-                                        </span>
+                                        <p>nombre de chambes: {details.nbrOfRooms}</p>
+                                        <p>nombre de lits: {details.nbrOfBeds}</p>
+                                        {/* <span>Note : {details.rating}/5</span> */}
+                                        
                                     </div>
                                     <div>
                                         <p>Services :</p>
-                                            {services}
+                                        <ul>
+                                            {service.wi_fi ? <li>Wi-fi/Internet</li> : null}
+                                            {service.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
+                                            {service.breakfast ? <li>Repas</li> : null}
+                                            {service.landry ? <li>Blanchisserie</li> : null}
+                                            {service.swimingPool ? <li>Piscine</li> : null}
+                                        </ul>
                                         <span>Prix par personne: {details.price} euros</span>
                                     </div>
                                 </div>

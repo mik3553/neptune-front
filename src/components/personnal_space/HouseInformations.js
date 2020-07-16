@@ -6,30 +6,29 @@ export default class PersonalInformations extends Component {
     state = {
         isShow : false,
         details : this.props.details,
-        services : {}
     }
-    abortController = new AbortController();
-    componentDidMount(){
-        let options = {
-            signal: this.abortController.signal,
-            method : 'GET',
-            headers : {
-                'Content-type': 'application/x-www-form-urlencoded',
-            }
-        }
-        let services = this.state.details.services
-        console.log(services)
-        fetch(`http://localhost:4000/service/${services}`, options)
-        .then(response => {
-            response.json()
-            .then(response =>{
-                this.setState({services : response});
-            })
-        })
-    }
-    componentWillUnmount() {
-        this.abortController.abort();
-    }
+    // abortController = new AbortController();
+    // componentDidMount(){
+    //     let options = {
+    //         signal: this.abortController.signal,
+    //         method : 'GET',
+    //         headers : {
+    //             'Content-type': 'application/x-www-form-urlencoded',
+    //         }
+    //     }
+    //     let services = this.state.details.services
+    //     console.log(services)
+    //     fetch(`https://neptune-back.abdelkrim-sahraoui.com/service/${services}`, options)
+    //     .then(response => {
+    //         response.json()
+    //         .then(response =>{
+    //             this.setState({services : response});
+    //         })
+    //     })
+    // }
+    // componentWillUnmount() {
+    //     this.abortController.abort();
+    // }
 
     handleShow = () => {
         let isShow = !this.state.isShow;
@@ -53,16 +52,11 @@ export default class PersonalInformations extends Component {
         let month = date.getMonth() + 1
         let year = date.getFullYear()
         let house_creation_date = `${day}-${month}-${year}`
-        const services = {...this.state.services}
-            // .map(service => (
-            //     <ul key={service._id}>
-            
-            //     </ul>
-            // ))
-            console.log(services);
+        const services = this.state.details.services
+
         const images = details.images
         .map( (photo,index) => (
-            <img key={index} src={`http://localhost:4000/${photo}`} alt={photo} />
+            <img key={index} src={`https://neptune-back.abdelkrim-sahraoui.com/${photo}`} alt={photo} />
         ));
         return (
             <article className='houseInformations'>
@@ -79,10 +73,11 @@ export default class PersonalInformations extends Component {
                     <p><span>prix  : </span>{details.price} euros</p>
                     <h3><span>Services</span></h3>
                         <ul>
+                            {services.wi_fi ? <li>Wi-fi/Internet</li> : null}
+                            {services.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
                             {services.breakfast ? <li>Repas</li> : null}
                             {services.landry ? <li>Blanchisserie</li> : null}
-                            {services.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
-                            {services.wi_fi ? <li>Wi-fi/Internet</li> : null}
+                            {services.swimingPool ? <li>Piscine</li> : null}
                         </ul>
                     <h3><span>Photos</span></h3>
                     <div className='houseInformations-images'>{images}</div>

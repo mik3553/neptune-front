@@ -5,16 +5,58 @@
     box-shadow: 0 5px 8px 0 grey;
     padding: 1rem 0;
 }
+.house-details-page-service div {
+    width: 100%;
+}
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: auto;
+  line-height: 10rem;
+  background: #364d79;
+  overflow: hidden;
+}
+/* .ant-rate {
+    margin-right: 1rem;
+} */
+.image-slide {
+    height: 15rem;
+}
 .localisation {
+    /* width: 80%; */
+    display: flex;
+    justify-content: space-evenly;
     margin: 0.5rem;
     border: 1px solid rgba(1, 1, 65, 0.876);
     padding: 0.5rem;
+}
+/* .ant-rate .ant-rate-disabled {
+    color : blue;
+    color: red ;
+} */
+.localisation div {
+    width: 50%;
 }
 .house-details-page-service h2, figcaption {
     text-align: center;
     margin: 0.5rem auto;
     padding: 0.5rem;
 }
+.favoris {
+    height: 100%;
+    margin: auto;
+}
+.favoris img {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    margin: auto;
+    transition: width 1s, height 1s;
+}
+.favoris img:hover {
+    width: 6rem;
+    height: 6rem;
+}
+
 .house-details-page-service p {
    margin: 0.5rem 0;
 }
@@ -23,43 +65,40 @@
 }
 
 .house-details-page-service {
+    width: 80%;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
-    margin: 1rem 0.5rem ;
+    margin: 1rem auto ;
     padding-bottom: 1rem;
 }
-.house-details-page-service button {
+/* .house-details-page-service button {
     margin: 0.5rem auto auto auto;
     width: 4.5rem;
     height: 1.5rem;
     display: block;
-}
+} */
 .house-details-page-service span {
   display: block;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   text-align: center;
 }
 .house-details-page-service ul {
   margin-left: 1rem;
 }
-.house-details-page-service img {
-    display: block;
-    width: 3rem;
-    margin: 0.5rem auto 0 auto;
-    transition: width 0.5s;
-}
-.house-details-page-service img:hover {
-    width: 3.5rem;
-}
 .comments {
     width: 95%;
     margin: 1rem auto;
 }
-.comment-details {
+.house-details-page .comment-details {
     border: 1px solid rgba(1, 1, 65, 0.876);
     margin: 1rem auto;
+    width: 80%;
+}
+.house-details-page article {
+    width: 80%;
+    margin: 0 auto;
 }
 .comment-span{
     display: block;
@@ -76,7 +115,8 @@
 }
 .addComment {
     text-align: center;
-    padding: 1rem;
+    width: 80%;
+    margin: 0.5rem auto;
 }
 .addComment textarea  {
     display: block;
@@ -90,10 +130,31 @@
 }
 
 @media screen and (min-width: 800px){
- 
+    .ant-carousel .slick-slide {
+        text-align: center;
+        height: auto;
+        line-height: 10rem;
+        background: #364d79;
+        overflow: hidden;
+    }
+    .image-slide {
+        height: 22rem;
+        width: 15rem;
+    }
+
     .house-details-page {
         width: 45rem;
         margin: 1rem auto;
+    }
+    .localisation img {
+        display: block;
+        width: 5rem;
+        /* height: 4rem; */
+        /* margin: 0.5rem 0 0 0; */
+        transition: width 1s, height 1s;
+    }
+    .localisation img:hover {
+        width: 6rem;
     }
  
 }

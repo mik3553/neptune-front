@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+// import formDate from '../../utils/formatDate';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import './booking.css';
+import { Button } from 'antd';
 
 class Booking extends Component {
     constructor(props) {
@@ -8,6 +12,7 @@ class Booking extends Component {
 
         // console.log(props)
         const {house_id} = this.props
+        // console.log(house)
 
         this.state = {
             priceEach :'',
@@ -16,15 +21,19 @@ class Booking extends Component {
             departure:'',
             nbrOfPersons:'',
             errors : [],
-            // booking: {}
+            booking: {},
+            bookedDates : []
         }
     }
     componentDidUpdate(prevProps) {
         if (this.props.house !== prevProps.house) {
-            this.setState({ priceEach : this.props.house.price});
+            this.setState({ 
+                priceEach : this.props.house.price,
+                bookedDates : this.props.house.bookedDates
+            });
         }
     } 
-    handleValidation = (storage, arrival, departure, nbrOfPersons) => {
+    handleValidation = (storage, arrival, departure, nbrOfPersons, bookedDates) => {
         const errors = [];
 
         if (storage == null ) {
@@ -40,6 +49,9 @@ class Booking extends Component {
         if (nbrOfPersons.length === 0) {
             errors.push("choisissez le nombre de personnes");
         }
+        // if (bookedDates.length === 0) {
+        //     errors.push("choisissez le nombre de personnes");
+        // }
         return errors;
     };
 
@@ -47,9 +59,21 @@ class Booking extends Component {
         const {name , value} = event.target;
         this.setState({[name]:value})
     }
+    handleArrival = (date) => {
+        this.setState({ 
+            arrival: date,
+        })
+    }
+    handleDeparture = (date) => {
+        this.setState({ 
+            departure: date,
+        })
+    }
+    
 
     handleSubmit = async (event) => {
         event.preventDefault()
+        this.setState({ errors : [] });
 
         const {arrival , departure , nbrOfPersons} = this.state;
         const errors = this.handleValidation(localStorage.getItem('token'),arrival, departure, nbrOfPersons);
@@ -66,10 +90,10 @@ class Booking extends Component {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         };
-        const response = await fetch(`http://localhost:4000/booking`, options);
+        const response = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/booking`, options);
         if (response.status === 201) {
             const jsonData = await response.json();
-            console.log(jsonData)
+           
             this.setState({
                 errors : [],
                 arrival:'',
@@ -86,6 +110,7 @@ class Booking extends Component {
             // const jsonData = await response.json();
             // console.log(jsonData);
             localStorage.removeItem('token');
+            this.props.history.push('/register');
         }
         if(response.status === 400) {
             // const jsonData = await response.json();
@@ -93,26 +118,89 @@ class Booking extends Component {
             this.setState({errors});
             return errors;
         }
+        if (response.status === 404) {
+            
+            let errors = [...this.state.errors, 'ces dates sont déja reserver dsl'];
+            this.setState({ errors });
+            return errors;
+        }
     }
     
     render() {
-        const {errors} = this.state
+        const {errors, bookedDates} = this.state;
+        // let elements = [];
+        // for (let index = 0; index < bookedDates.length; index++) {
+        //     let date = bookedDates[index];
+        //     elements.push(date);
+        // }
+    
+        let elements = [];
+        for (let index of bookedDates) {
+             elements.push(new Date(index));
+        }
+        // const datess = new Date('07/10/2020');
+        // console.log(datess)
+        let elementsCss = (elements) => {
+            
+            // bookedDates.forEach(element => {
+            //     // date.push(new Date(element).getTime())
+            //     let date = new Date(element).getTime()
+            //     console.log(date)
+            //     // return date
+            // });
+            // return date
+            let datesArray = []
+            for (let index of elements) {
+                // let date = new Date(index).getTime()
+                datesArray.push(new Date(index).getTime())
+            }
+            return datesArray;
+
+        }
         
         return (
             <form 
                 onSubmit = {this.handleSubmit}
                 className='booking'>
                 <div className='date'>
-                    <fieldset>
+                    <fieldset
+                    className='arrival'>
+                        <label>Date d'arrivée :</label>
+                        <DatePicker
+                            className='datepicker'
+                            onChange={this.handleArrival}
+                            selected={this.state.arrival}
+                            dateFormat="dd-MM-yyyy"
+                            minDate={new Date()}
+                            // locale='fr'
+                            excludeDates={elements}
+                            dayClassName={ date => date.getTime() === elementsCss(bookedDates).toString() ? 'disabled-date' : undefined }
+                        />
+                    </fieldset>
+                    <fieldset
+                        className='departure'>
+                        <label>Date de départ :</label>
+                        <DatePicker
+                            className='datepicker'
+                            onChange={this.handleDeparture}
+                            selected={this.state.departure}
+                            dateFormat="dd-MM-yyyy"
+                            minDate={new Date()}
+                            excludeDates={elements}
+                            // dayClassName={date => date.getTime() === datess.getT ? 'disabled-date' : undefined}
+                        />
+                    </fieldset>
+                    {/* <fieldset>
                         <label>Date d'arrivée :</label>
                         <input
                             onChange={this.handleChange}
                             type='date' 
                             name='arrival'
+                            min={Date.now()}
                             value={this.state.arrival}
                             />
-                    </fieldset>
-                    <fieldset>
+                    </fieldset> */}
+                    {/* <fieldset>
                         <label>Date de départ :</label>
                         <input
                             onChange={this.handleChange} 
@@ -120,18 +208,19 @@ class Booking extends Component {
                             name='departure'
                             value={this.state.departure}
                             />
-                    </fieldset>
+                    </fieldset> */}
                 </div>
-                <fieldset>
+                <fieldset 
+                    className='nbrOfPersons'
+                >
                     <label>Nombre de personne :</label>
                     <input 
                         onChange={this.handleChange}
-                        className='nbrOfPersons'
                         type='number' 
                         value={this.state.nbrOfPersons}
                         name='nbrOfPersons'/>
                 </fieldset>
-                <button type='submit'>valider</button>
+                <Button className='button' htmlType='submit' type="primary" size={'middle'}>valider</Button>
                 {errors.map(error => <p     
                                         style={{ color: 'red'}}
                                         key={error}>{error}</p>)}

@@ -5,12 +5,12 @@
 }
 .landin-page-filter {
     z-index: 6;
-    width: 8rem;
+    width: 12rem;
     background-color: rgba(1, 1, 65, 0.876);
     padding: 1rem;
     padding-right: 0;
     position: fixed;
-    left: -8rem;
+    left: -10.7rem;
     top: 10.5rem;
     border-bottom-right-radius: 1rem;
     border-top-right-radius: 1rem;
@@ -25,12 +25,18 @@
 }
 
 .showFilter {
-    font-size: 2rem;
+    font-size: 1.3rem;
+    letter-spacing: 8px;
     font-weight: bold;
     color: white;
-    height: 10rem;
+    /* height: 10rem; */
     background-color: rgba(1, 1, 65, 0.966);
-    
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    font-style: italic;
+}
+.showFilter:focus {
+    color: #00d4ff;
 }
 @media screen and (min-width: 800px){
 

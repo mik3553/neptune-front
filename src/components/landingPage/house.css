@@ -3,53 +3,83 @@
     width: 20rem;
     margin: 1rem auto;
     box-shadow: 0 5px 8px 0 grey;
+    transition: 0.7s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: flex-end; */
+    /* vertical-align: bottom; */
 }
-.house h3 {
- color: white;
+.house:hover{
+    transform: scale(1.03);
+    box-shadow: 0 12px 20px 0 grey;
 }
-/* .house img {
+.image {
+    /* text-align: center; */
+    /* display: block; */
+    overflow: hidden;
+    border-bottom: 1px solid#00d4ff;
     width: 100%;
-    height: 100%;
+    margin: 0 auto;
+    height: 15rem;
+}
+/* .house h3 {
+ color: white;
 } */
-.house h2, figcaption {
+
+.house h2  {
     text-align: center;
     margin: 0.5rem auto;
     padding: 0.5rem;
+    color: #090979;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 1.6em;
 }
-.house-details button {
-    background-color: #00d4ff;
+
+.house figcaption {
+    text-align: center;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+    color : grey;
+    font-size: 1.2em;
+    /* height: 4rem; */
 }
 
 .house-details {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 1rem 0.5rem ;
+    flex-direction: column;
+    width: 60%;
+    margin: 1rem auto ;
+    /* margin-top: 3rem; */
     padding-bottom: 1rem;
+    /* vertical-align: baseline; */
+    /* position: absolute; */
+    
 }
-.house-details button {
-    margin-top: 0.5rem;
-    width: 4.5rem;
-    height: 1.5rem;
+.house-details div {
+    display: flex;
+    justify-content: space-between;
+    /* margin-bottom: 0; */
 }
-.house-details span {
-  display: block;
-  margin-top: 1rem;
-  text-align: center;
+.house-span {
+    color: #00d4ff;
 }
+
+.rate {
+    font-size: 0.9em;
+    /* color: #00d4ff; */
+}
+
 .house-details ul {
   margin-left: 1rem;
 }
 
-.awssld__bullets {
-    margin-bottom: 3rem;
-    z-index: 5;
-}
 
 @media screen and (min-width: 800px) and (max-width: 1100px){
  
     .house {
-        width: 18rem;
+        width: 18.5rem;
         margin: 1rem auto;
     }
  
@@ -57,8 +87,9 @@
 @media screen and (min-width: 1100px){
 
     .house {
-        width: 18rem;
+        width: 18.5rem;
         margin: 1rem auto;
     }
+    
 }
 

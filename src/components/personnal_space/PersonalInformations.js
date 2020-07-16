@@ -29,14 +29,13 @@ export default class PersonalInformations extends Component {
             }, 
         }
         if (localStorage.getItem('token') !== null){
-            fetch('http://localhost:4000/userBookings',
+            fetch('https://neptune-back.abdelkrim-sahraoui.com/userBookings',
                 options)
                 .then(response => {
                     if (response.status === 200) {
                         response.json()
                             .then(response => {
                                 if(this.ismounted){
-                                    console.log(response)
                                     this.setState({
                                         userBookings: response
                                     });
@@ -102,6 +101,12 @@ export default class PersonalInformations extends Component {
         }else {
             favLength = <li style={{color:'#00d4ff', textAlign:'center'}} >Vous n'avez enregistrer aucun favoris pour le moment</li>
         }
+        let userBookingsLength = null
+        if(userBookings.length !== 0){
+            userBookingsLength = userBookings
+        }else {
+            userBookingsLength = <li style={{color:'#00d4ff', textAlign:'center'}} >Vous n'avez aucune réservation pour le moment</li>
+        }
         
         return (
             <article className='personalInformations'>
@@ -121,7 +126,7 @@ export default class PersonalInformations extends Component {
                 <div className='myBookings'>
                     <h2>Mes réservations</h2>
                     <ul>
-                        {userBookings}
+                        {userBookingsLength}
                     </ul>
                 </div>
             </article>

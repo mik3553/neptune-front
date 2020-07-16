@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
+
+import 'antd/dist/antd.css';
+import { Rate } from 'antd';
 
 import './house.css'
 
@@ -19,44 +20,44 @@ class House extends Component {
 
         const requireImage = (chemin) => {
             try {
-                return (`http://localhost:4000/${chemin}`)
+                return (`https://neptune-back.abdelkrim-sahraoui.com/${chemin}`)
             }
             catch (err) {
                 return require(`../../images/background.jpg`)
             }
         }
-        const images = details.images
-        .map(image =>
-            <div
-                className='image-slide'
-                key={image}
-                data-src={requireImage(image)} />
-        )
-
+        const image = requireImage(details.images[0])
+    
+        // let rate = datails.rating;
+        let totalRates = (array) => {
+            let somme = 0;
+            for (const rating of array) {
+                somme += rating
+            }
+            return somme / array.length;
+        }
+        
         return (
             <figure className='house' onClick={this.handleClick}>
-                <AwesomeSlider 
-                    className='slider'>
-                    {images}
-                </AwesomeSlider>
+                <img 
+                    className='image'
+                    alt={image}
+                    src={image}
+                />
                 <h2>{details.title}</h2>
                 <figcaption>{details.description}</figcaption>
                 <div className='house-details'>
+                    
+                    <div>nombre de chambes :<span className='house-span'>{details.nbrOfRooms}</span ></div>
+                    <div>nombre de lits :<span className='house-span'>{details.nbrOfBeds}</span></div>
+                    {/* <p>nombre de personnes{details.nbrOfPersons}</p> */}
+                    <div>Prix :<span className='house-span'>{details.price} euros</span></div>
+                    
                     <div>
-                        <p>nombre de chambes{details.nbrOfRooms}</p>
-                        <p>nombre de lits{details.nbrOfBeds}</p>
-                        {/* <p>nombre de personnes{details.nbrOfPersons}</p> */}
-                        <span>Note : {details.rating}/5</span>
-                    </div>
-                    <div>
-                        <span>{details.price} euros</span>
-                        <button
-                            onClick={this.handleClick}
-                        >
-                            details
-                        </button>
+                        Note : ({details.rating.length })<Rate className='rate' disabled defaultValue={totalRates(details.rating)} allowHalf={true} />
                     </div>
                 </div>
+                
             </figure>
         )
     }

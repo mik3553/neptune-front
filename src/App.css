@@ -60,11 +60,15 @@ a:hover {
 }
 
 h2 {
-	font-size: 1.2em;
-	text-align: center;
-	margin: 1rem auto;
-	font-weight: 900;
-	color: #090979;
+
+    text-align: center;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+    color: #090979;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 1.6em;
+
 }
 h3 {
 	font-size: 1.2em;
@@ -72,6 +76,17 @@ h3 {
 	margin: 1rem auto;
 }
 
+.button {
+	width: 6rem;
+	background-color: #090979;
+}
+.ant-btn-primary {
+	background-color: #090979;
+}
+
 form button {
 	background-color: #00d4ff;
+}
+main {
+	margin-top: 6rem;
 }

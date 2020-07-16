@@ -5,7 +5,7 @@ export default class HouseToModify extends Component {
     constructor(props) {
         super(props);
 
-        const {details, services} = this.props;
+        const {details} = this.props;
 
         this.state = {
             token        : localStorage.getItem('token'),
@@ -20,10 +20,11 @@ export default class HouseToModify extends Component {
             nbrOfRooms   : details.nbrOfRooms,
             price        : details.price,
             
-            animals      :services.animals,
-            landry       :services.landry,
-            breakfast    :services.breakfast,
-            wi_fi        :services.wi_fi,
+            animals      :details.services.animals,
+            landry       :details.services.landry,
+            breakfast    :details.services.breakfast,
+            wi_fi        :details.services.wi_fi,
+            swimingPool  :details.services.swimingPool,
         };
     }
     handleChange = (event) => {
@@ -40,7 +41,6 @@ export default class HouseToModify extends Component {
     }
     handleSubmit = (event) => {
         // event.preventDefault();
-
         let options = {
             method: 'PUT',
             body: new URLSearchParams(this.state),
@@ -49,7 +49,7 @@ export default class HouseToModify extends Component {
                 'Content-type': 'application/x-www-form-urlencoded'
             }
         }
-        fetch('http://localhost:4000/house', options)
+        fetch('https://neptune-back.abdelkrim-sahraoui.com/house', options)
             .then(response => {
                 response.json()
                 .then(response => {
@@ -110,8 +110,10 @@ export default class HouseToModify extends Component {
                         <input onClick={this.handleChecked} type='checkbox' name='breakfast' defaultChecked={this.state.breakfast} value={this.state.breakfast} />
                         <label>Blanchisserie</label>
                         <input onClick={this.handleChecked} type='checkbox' name='landry' defaultChecked={this.state.landry} value={this.state.landry} />
-                        <label>wi_fi</label>
+                        <label>Wi_fi</label>
                         <input onClick={this.handleChecked} type='checkbox' name='wi_fi' defaultChecked={this.state.wi_fi} value={this.state.wi_fi} />
+                        <label>Piscine</label>
+                        <input onClick={this.handleChecked} type='checkbox' name='swimingPool' defaultChecked={this.state.swimingPool} value={this.state.swimingPool} />
                     </fieldset>
 
                     {/* <fieldset>

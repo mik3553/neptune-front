@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from 'react'
-import Header from '../header/Header'
-import Footer from '../footer/Footer'
+import React, { Component, Fragment } from 'react';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
+import {Alert} from 'antd';
 
 import './loginPage.css'
 
@@ -31,6 +32,7 @@ export default class RegisterForm extends Component {
             emailError: false,
             houseInfo : false,
             errorSubmit: '',
+            alert : false
         }
     }
     handleChange = (event) => {
@@ -67,13 +69,13 @@ export default class RegisterForm extends Component {
                 method: 'POST',
                 body: formData
             }
-            fetch('http://localhost:4000/registerAdvertiser', options)
+            fetch('https://neptune-back.abdelkrim-sahraoui.com/registerAdvertiser', options)
                 .then(response => {
                     if (response.status === 201) {
                         response.json()
                             .then(response => {
                                 console.log(response)
-                                this.setState({ errorSubmit: 'félicitation votre compte est crée !' })
+                                this.setState({ alert : true })
                             })
                     }
                     else if (response.status === 204) {
@@ -154,6 +156,15 @@ export default class RegisterForm extends Component {
         let houseInfo = null
         if(this.state.houseInfo){
             houseInfo = <li className='error'>Veuillez remplir toutes les informations de votre maison d'hôte</li>
+        }
+        let alert = null;
+        if (this.state.alert) {
+            alert = <Alert
+                message="Compte crée"
+                description="Félicitation votre compte est crée, vous pouvez vous connecter. Cependant votre annonce devra étre traité avant la mise en ligne."
+                type="success"
+                showIcon
+            />
         }
         return (
             <Fragment>
@@ -347,6 +358,7 @@ export default class RegisterForm extends Component {
                                     />
                             </div>
                             <input type='submit' />
+                            {alert}
                             <span className='error'>{this.state.errorSubmit}</span>
                             <ul>
                                 {nameError}
