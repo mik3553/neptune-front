@@ -41,18 +41,17 @@ export default class PersonalInformations extends Component {
         if(isShow){
             houseToModify = <HouseToModify
                                 details={this.state.details}
-                                services = {this.state.services}
                             />
         }
        
-        const {details}=this.state
+        const {details}=this.state;
         let creationDate = details.creationDate
         let date = new Date(creationDate)
         let day = date.getDate()
         let month = date.getMonth() + 1
         let year = date.getFullYear()
         let house_creation_date = `${day}-${month}-${year}`
-        const services = this.state.details.services
+        const services = this.state.details.services[0]
 
         const images = details.images
         .map( (photo,index) => (
@@ -67,7 +66,7 @@ export default class PersonalInformations extends Component {
                     <p><span>description : </span>{details.description}</p>
                     <p><span>addresse : </span>{details.adress}</p>
                     <p><span>code postal : </span>{details.zipcode}</p>
-                    <p><span>département : </span>{details.department}</p>
+                    <p><span>region : </span>{details.region}</p>
                     <p><span>nombre de chambres : </span>{details.nbrOfRooms}</p>
                     <p><span>nombre de lits : </span>{details.nbrOfBeds}</p>
                     <p><span>prix  : </span>{details.price} euros</p>

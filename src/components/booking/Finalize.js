@@ -22,7 +22,7 @@ export default class Finalize extends Component {
     //             'Authorization': `bearer ${localStorage.getItem('token')}`
     //         }
     //     };
-    //     const res = await fetch(`http://localhost:4000/booking/${this.state.booking_id}`, options);
+    //     const res = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/booking/${this.state.booking_id}`, options);
     //     const recap = await res.json();
     //     this.setState(prevState => ({
     //         recap

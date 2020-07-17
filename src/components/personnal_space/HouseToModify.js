@@ -15,16 +15,16 @@ export default class HouseToModify extends Component {
             description  : details.description,
             adress       : details.adress,
             zipcode      : details.zipcode,
-            department   : details.department,
+            region       : details.region,
             nbrOfBeds    : details.nbrOfBeds,
             nbrOfRooms   : details.nbrOfRooms,
             price        : details.price,
             
-            animals      :details.services.animals,
-            landry       :details.services.landry,
-            breakfast    :details.services.breakfast,
-            wi_fi        :details.services.wi_fi,
-            swimingPool  :details.services.swimingPool,
+            animals      :details.services[0].animals,
+            landry       :details.services[0].landry,
+            breakfast    :details.services[0].breakfast,
+            wi_fi        :details.services[0].wi_fi,
+            swimingPool  :details.services[0].swimingPool,
         };
     }
     handleChange = (event) => {
@@ -53,7 +53,6 @@ export default class HouseToModify extends Component {
             .then(response => {
                 response.json()
                 .then(response => {
-                    console.log(response)
                     if (response.status === 403) {
                         this.setState({ redirect: true });
                     };
@@ -87,8 +86,8 @@ export default class HouseToModify extends Component {
                         <input onChange={this.handleChange} type='number' name='zipcode' value={this.state.zipcode} />
                     </fieldset>
                     <fieldset>
-                        <span>department : </span>
-                        <input onChange={this.handleChange} type='text' name='department' value={this.state.department} />
+                        <span>region : </span>
+                        <input onChange={this.handleChange} name='region' value={this.state.region} />
                     </fieldset>
                     <fieldset>
                         <span>nbrOfRooms : </span>

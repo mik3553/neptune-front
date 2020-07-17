@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
@@ -35,7 +35,7 @@ export default class Contact extends Component {
                 'Content-type': 'application/x-www-form-urlencoded',
             }
         };
-        fetch(`https://neptune-back.abdelkrim-sahraoui.com/contact`, options)
+        fetch(`https://localhost:4000/contact`, options)
         .then(response => {
             console.log(response)
             if(response.status === 201){
@@ -85,37 +85,38 @@ export default class Contact extends Component {
             </li>))
 
         return (
-            <main>
+            <Fragment>
                 <Header />
-                <section className='contact'>
-                    {success}
-                    <article>
-                        <h2>Formulaire de contact</h2>
-                        <form className='form' onSubmit={this.handleSubmit}>
-                            <div className='fieldset'>
-                                <label>Votre email :</label>
-                                <input type='email' name='email' value={this.state.email} onChange={this.handleChange}  />
-                            </div>
-                            <div className='fieldset'>
-                                <label>Sujet :</label>
-                                <input type='text' name='subject' value={this.state.subject} onChange={this.handleChange} />
-                            </div>
-                            <div>
-                                <label>Votre message :</label>
-                                <textarea rows='15' name='message' value={this.state.message} onChange={this.handleChange} />
-                            </div>
-                            <div>
-                                <input type='submit' value='Envoyer' />
-                            </div>
-                            <ul>
-                                {errors}
-                            </ul>
-                        </form>
-                    </article>
-
-                </section>
+                <main>
+                    <section className='contact'>
+                        {success}
+                        <article>
+                            <h2>Formulaire de contact</h2>
+                            <form className='form' onSubmit={this.handleSubmit}>
+                                <div className='fieldset'>
+                                    <label>Votre email :</label>
+                                    <input type='email' name='email' value={this.state.email} onChange={this.handleChange}  />
+                                </div>
+                                <div className='fieldset'>
+                                    <label>Sujet :</label>
+                                    <input type='text' name='subject' value={this.state.subject} onChange={this.handleChange} />
+                                </div>
+                                <div>
+                                    <label>Votre message :</label>
+                                    <textarea rows='15' name='message' value={this.state.message} onChange={this.handleChange} />
+                                </div>
+                                <div>
+                                    <input type='submit' value='Envoyer' />
+                                </div>
+                                <ul>
+                                    {errors}
+                                </ul>
+                            </form>
+                        </article>
+                    </section>
+                </main>
                 <Footer />
-            </main>
+            </Fragment>
         )
     }
 }
