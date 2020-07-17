@@ -35,7 +35,7 @@ export default class HouseDetails extends Component {
         const response     = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/house/${this.props.match.params.id}`, options);
         const jsonData     = await response.json();
         const dataImage    = await jsonData.images;
-        const dataServices = await jsonData.services; 
+        const dataServices = await jsonData.services[0]; 
         
         this.setState({
             details : jsonData,
@@ -82,7 +82,6 @@ export default class HouseDetails extends Component {
                         src={`https://neptune-back.abdelkrim-sahraoui.com/${photo}`} />
                 )
             const service = this.state.services;
-          
                 
             return (
                 <Fragment>

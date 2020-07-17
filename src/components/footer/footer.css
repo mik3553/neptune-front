@@ -21,7 +21,11 @@
     color : white;
 }
 .footer li:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
+    color:#00d4ff;
+}
+.footer li{
+   margin: 0.4rem auto;
 }
 
 .footer h4 {

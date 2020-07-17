@@ -27,6 +27,7 @@ class Header extends Component {
     }
     componentWillUnmount(){
         window.removeEventListener('scroll', this.onScroll);
+        // this.getDecode();
     }
     // componentDidUpdate(prevProps, prevState){
     //     if(prevState.decoded.exp !== this.state.decoded.exp){
@@ -37,6 +38,7 @@ class Header extends Component {
     //     }
     //     console.log(prevState)
     // }
+
     getDecode = async () => {
         let options = {
             method: 'GET',
@@ -54,6 +56,7 @@ class Header extends Component {
             })
             // console.log(this.state.decoded);
         } else {
+            this.setState({ token: null })
             localStorage.removeItem('token');
         }
     }
@@ -69,6 +72,7 @@ class Header extends Component {
     }
     logOut = async () =>{
 
+        this.setState({token : null})
         const options = {
             method : 'POST',
             body : new URLSearchParams(this.state),
@@ -84,7 +88,7 @@ class Header extends Component {
             // console.log(jsonData)
             localStorage.removeItem("token")
             this.props.history.push({
-                pathname: `/register`
+                pathname: `/`
             });  
         }
     }
