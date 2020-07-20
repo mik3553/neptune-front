@@ -51,7 +51,7 @@ export default class PersonalInformations extends Component {
         let month = date.getMonth() + 1
         let year = date.getFullYear()
         let house_creation_date = `${day}-${month}-${year}`
-        const services = this.state.details.services[0]
+        const services = this.state.details.services
 
         const images = details.images
         .map( (photo,index) => (
@@ -72,11 +72,11 @@ export default class PersonalInformations extends Component {
                     <p><span>prix  : </span>{details.price} euros</p>
                     <h3><span>Services</span></h3>
                         <ul>
-                            {services.wi_fi ? <li>Wi-fi/Internet</li> : null}
-                            {services.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
-                            {services.breakfast ? <li>Repas</li> : null}
-                            {services.landry ? <li>Blanchisserie</li> : null}
-                            {services.swimingPool ? <li>Piscine</li> : null}
+                            {services[0] !== 'undefined' ? <li>Repas</li> : null}
+                            {services[1] !== 'undefined' ? <li>Blanchisserie</li> : null}
+                            {services[2] !== 'undefined' ? <li>Animaux acceptés</li> : <li>Animaux non accéptés</li>}
+                            {services[3] !== 'undefined' ? <li>Wi-fi/Internet</li> : null}
+                            {services[4] !== 'undefined' ? <li>Piscine</li> : null}
                         </ul>
                     <h3><span>Photos</span></h3>
                     <div className='houseInformations-images'>{images}</div>

@@ -23,10 +23,11 @@ export default class RegisterForm extends Component {
             nbrOfBeds:'',
             price:'',
             images:'',
-            breakfast: false,
-            landry: false,
-            animals: false,
-            wi_fi : false,
+            // breakfast: undefined,
+            // landry: undefined,
+            // animals: undefined,
+            // swimingPool: undefined,
+            // wi_fi: undefined,
             nameError : false,
             passwordError : false,
             emailError: false,
@@ -34,6 +35,7 @@ export default class RegisterForm extends Component {
             errorSubmit: '',
             alert : false
         }
+        this.formData = new FormData()
     }
     handleChange = (event) => {
         const { value, name } = event.target
@@ -43,31 +45,30 @@ export default class RegisterForm extends Component {
         event.preventDefault() 
         const { title, adress, zipcode, region, nbrOfRooms, nbrOfBeds, price, images} = this.state
         if (this.nameError(this.state.firstName, this.state.lastName) && this.checkEmail(this.state.email) && this.checkPassword(this.state.password) && this.state.password === this.state.passwordC && this.checkHouseInformations(title, adress, zipcode, region, nbrOfRooms, nbrOfBeds, price, images) ) {
-            console.log('helloo')
             const inputFile = document.getElementById('images').files
-            const formData = new FormData()
             for (let i = 0; i < inputFile.length; i++) {
-                formData.append('images', inputFile[i])
+                this.formData.append('images', inputFile[i])
             }
-            formData.append('title', this.state.title)
-            formData.append('firstName', this.state.firstName)
-            formData.append('lastName', this.state.lastName)
-            formData.append('email', this.state.email)
-            formData.append('description', this.state.description)
-            formData.append('adress', this.state.adress)
-            formData.append('zipcode', this.state.zipcode)
-            formData.append('password', this.state.password)
-            formData.append('region', this.state.region)
-            formData.append('nbrOfRooms', this.state.nbrOfRooms)
-            formData.append('nbrOfBeds', this.state.nbrOfBeds)
-            formData.append('price', this.state.price)
-            formData.append('breakfast', this.state.breakfast)
-            formData.append('landry', this.state.landry)
-            formData.append('wi_fi', this.state.wi_fi)
-            formData.append('animals', this.state.animals)
+            this.formData.append('title', this.state.title)
+            this.formData.append('firstName', this.state.firstName)
+            this.formData.append('lastName', this.state.lastName)
+            this.formData.append('email', this.state.email)
+            this.formData.append('description', this.state.description)
+            this.formData.append('adress', this.state.adress)
+            this.formData.append('zipcode', this.state.zipcode)
+            this.formData.append('password', this.state.password)
+            this.formData.append('region', this.state.region)
+            this.formData.append('nbrOfRooms', this.state.nbrOfRooms)
+            this.formData.append('nbrOfBeds', this.state.nbrOfBeds)
+            this.formData.append('price', this.state.price)
+            this.formData.append('breakfast', this.state.breakfast)
+            this.formData.append('landry', this.state.landry)
+            this.formData.append('wi_fi', this.state.wi_fi)
+            this.formData.append('animals', this.state.animals)
+            this.formData.append('swimingPool', this.state.swimingPool)
             let options = {
                 method: 'POST',
-                body: formData
+                body: this.formData
             }
             fetch('https://neptune-back.abdelkrim-sahraoui.com/registerAdvertiser', options)
                 .then(response => {
@@ -92,7 +93,14 @@ export default class RegisterForm extends Component {
     }
     checkBoxes = (event)=>{
         const {name, checked} = event.target
-        this.setState({[name]:checked})
+        
+        if(checked === true){
+            console.log(name)
+            this.setState({[name]: name})
+        }
+        else {
+            this.setState({[name]: undefined })
+        }
     }
     checkEmail = (email) => {
         let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -356,6 +364,15 @@ export default class RegisterForm extends Component {
                                     value = {this.state.wi_fi}
                                     onClick={this.checkBoxes}
                                     />
+                            </div>
+                            <div className='checkboxes'>
+                                <label>Piscine:</label>
+                                <input
+                                    type='checkbox'
+                                    name='swimingPool'
+                                    value={this.state.swimingPool}
+                                    onClick={this.checkBoxes}
+                                />
                             </div>
                             <input type='submit' />
                             {alert}
