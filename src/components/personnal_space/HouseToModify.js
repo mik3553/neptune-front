@@ -20,11 +20,11 @@ export default class HouseToModify extends Component {
             nbrOfRooms   : details.nbrOfRooms,
             price        : details.price,
             
-            animals      :details.services[0].animals,
-            landry       :details.services[0].landry,
-            breakfast    :details.services[0].breakfast,
-            wi_fi        :details.services[0].wi_fi,
-            swimingPool  :details.services[0].swimingPool,
+            animals      :details.services[2],
+            landry       :details.services[1],
+            breakfast    :details.services[0],
+            wi_fi        :details.services[3],
+            swimingPool  :details.services[4],
         };
     }
     handleChange = (event) => {
@@ -35,12 +35,18 @@ export default class HouseToModify extends Component {
     }
     handleChecked = (event) => {
         let { name, checked } = event.target;
-        this.setState({
-            [name]: checked
-        });
+        if(checked === true){
+            this.setState({
+                [name]: name
+            });
+        }else {
+            this.setState({
+                [name] : undefined
+            })
+        }
     }
     handleSubmit = (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         let options = {
             method: 'PUT',
             body: new URLSearchParams(this.state),
@@ -60,10 +66,14 @@ export default class HouseToModify extends Component {
             })
     }
     render() {
+        console.log(this.props.details)
 
         if (this.state.redirect) {
             return <Redirect to='/register' />
         }
+
+        // let images = this.props.details.images
+        // images.map(image => (console.log(image)))
 
         return (
             <div className='houseInformations-toModify'>
@@ -103,21 +113,21 @@ export default class HouseToModify extends Component {
                     </fieldset>
                     <fieldset>
                         <span>Services : </span>
-                        <label>Animaux</label>
-                        <input onClick={this.handleChecked} type='checkbox' name='animals' defaultChecked={this.state.animals} value={this.state.animals} />
                         <label>Repas</label>
-                        <input onClick={this.handleChecked} type='checkbox' name='breakfast' defaultChecked={this.state.breakfast} value={this.state.breakfast} />
+                        <input onClick={this.handleChecked} type='checkbox' name='breakfast' defaultChecked={this.state.breakfast !== 'undefined' ? true : false } value={this.state.breakfast} />
                         <label>Blanchisserie</label>
-                        <input onClick={this.handleChecked} type='checkbox' name='landry' defaultChecked={this.state.landry} value={this.state.landry} />
+                        <input onClick={this.handleChecked} type='checkbox' name='landry' defaultChecked={this.state.landry !== 'undefined' ? true : false } value={this.state.landry} />
+                        <label>Animaux</label>
+                        <input onClick={this.handleChecked} type='checkbox' name='animals' defaultChecked={this.state.animals !== 'undefined' ? true : false } value={this.state.animals} />
                         <label>Wi_fi</label>
-                        <input onClick={this.handleChecked} type='checkbox' name='wi_fi' defaultChecked={this.state.wi_fi} value={this.state.wi_fi} />
+                        <input onClick={this.handleChecked} type='checkbox' name='wi_fi' defaultChecked={this.state.wi_fi !== 'undefined' ? true : false } value={this.state.wi_fi} />
                         <label>Piscine</label>
-                        <input onClick={this.handleChecked} type='checkbox' name='swimingPool' defaultChecked={this.state.swimingPool} value={this.state.swimingPool} />
+                        <input onClick={this.handleChecked} type='checkbox' name='swimingPool' defaultChecked={this.state.swimingPool !== 'undefined' ? true : false } value={this.state.swimingPool} />
                     </fieldset>
 
                     {/* <fieldset>
                             <span>images : </span>
-                            <input onChange={this.handleChange} type='file' name='images' id='images' multiple />
+                            <input onChange={this.handleChange} type='file' name='images' id='images'  multiple  />
                         </fieldset> */}
 
                     <button type='submit'>Envoyer</button>

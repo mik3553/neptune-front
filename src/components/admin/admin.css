@@ -24,8 +24,8 @@
     background-color: orange;
 }
 .onLine {
-    background-color: #00d4ff ;
-    opacity: 0.5;
+    background-color: initial ;
+    /* opacity: 0.5; */
 }
 
 .getMessages {

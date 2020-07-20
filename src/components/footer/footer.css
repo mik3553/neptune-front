@@ -20,7 +20,7 @@
 .footer a {
     color : white;
 }
-.footer li:hover{
+.footer li:hover, .footer a:hover{
     transform: scale(1.1);
     color:#00d4ff;
 }
@@ -62,6 +62,7 @@
     }
     .footer article {
      margin: auto 2rem;
+     width: 20rem;
     }
     footer h4 {
         width: 10rem;

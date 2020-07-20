@@ -18,7 +18,7 @@ export default class HouseDetails extends Component {
         this.state = {
             details : {},
             images : [],
-            services : {},
+            services : [],
         }
     }
     
@@ -35,7 +35,7 @@ export default class HouseDetails extends Component {
         const response     = await fetch(`https://neptune-back.abdelkrim-sahraoui.com/house/${this.props.match.params.id}`, options);
         const jsonData     = await response.json();
         const dataImage    = await jsonData.images;
-        const dataServices = await jsonData.services[0]; 
+        const dataServices = await jsonData.services; 
         
         this.setState({
             details : jsonData,
@@ -71,7 +71,8 @@ export default class HouseDetails extends Component {
     }
     
     render() {
-            const details = {...this.state.details}
+            const details = { ...this.state.details}
+            console.log(details)
 
             const images = [...this.state.images]
                 .map(photo =>
@@ -81,8 +82,18 @@ export default class HouseDetails extends Component {
                         key={photo}
                         src={`https://neptune-back.abdelkrim-sahraoui.com/${photo}`} />
                 )
-            const service = this.state.services;
-                
+            const services = [...this.state.services];
+            services.map(service => {
+                // console.log(service)
+                if(service != null){
+                    return (
+                        <li key={service}>{service}</li>
+                    )
+                }
+            })
+            
+
+        
             return (
                 <Fragment>
                     <Header />
@@ -126,11 +137,12 @@ export default class HouseDetails extends Component {
                                     <div>
                                         <p>Services :</p>
                                         <ul>
-                                            {service.wi_fi ? <li>Wi-fi/Internet</li> : null}
-                                            {service.animals ? <li>Animaux accéptés</li> : <li>Animaux non accéptés</li>}
-                                            {service.breakfast ? <li>Repas</li> : null}
-                                            {service.landry ? <li>Blanchisserie</li> : null}
-                                            {service.swimingPool ? <li>Piscine</li> : null}
+                                            {/* {services} */}
+                                            {services[0] !== 'undefined' ? <li>Repas</li> : null}
+                                            {services[1] !== 'undefined' ? <li>Blanchisserie</li> : null}
+                                            {services[2] !== 'undefined' ? <li>Animaux acceptés</li> : <li>Animaux non accéptés</li>}
+                                            {services[3] !== 'undefined' ? <li>Wi-fi/Internet</li> : null}
+                                            {services[4] !== 'undefined' ? <li>Piscine</li> : null}
                                         </ul>
                                         <span>Prix par personne: {details.price} euros</span>
                                     </div>

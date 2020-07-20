@@ -32,6 +32,8 @@ export default class Admin extends Component {
         // }
 
         this.btn = [];
+        this.btnDeleteClient = [];
+        // this.btnDeleteAdvertiser = [];
         this.opened = [];
         this.displayArticle = [];
     }
@@ -126,7 +128,7 @@ export default class Admin extends Component {
             }
         }
     } 
-    deleteUser =  (id, index) => {
+    deleteUser =  (id) => {
         const options = {
             method : 'DELETE',
             body: new URLSearchParams({
@@ -139,7 +141,9 @@ export default class Admin extends Component {
         }
         fetch('https://neptune-back.abdelkrim-sahraoui.com/deleteUser', options);
         //supprimer le visu 
-        this.btn[index].classList.add('displayNone');
+        // this.btn[index].classList.add('displayNone');
+        // this.btnDeleteAdvertiser[index].classList.add('displayNone');
+        this.btnDeleteClient[id].classList.add('displayNone');
     }
     checkHouse = (id) => {
         this.props.history.push({
@@ -160,23 +164,28 @@ export default class Admin extends Component {
             }
         }
         fetch('https://neptune-back.abdelkrim-sahraoui.com/validateHouse', options)
-        .then(response => {
-            if(response.status === 200){
-                // this.setState({toogleValidateHouse : true})
-                response.json()
-                .then(response => {
+        // .then(response => {
+        //     if(response.status === 200){
+        //         // this.setState({toogleValidateHouse : true})
+        //         response.json()
+        //         .then(response => {
                     
-                    console.log(response)
-                    if(response === true){
-                        this.btn[index].classList.remove('notOnLine');
-                        this.btn[index].classList.add('onLine');
-                    }else {
-                        this.btn[index].classList.remove('onLine');
-                        this.btn[index].classList.add('notOnLine');
-                    }
-                })
-            }
-        })
+        //             console.log(response)
+        //             // if(response === true){
+        //             //     // this.btnDeleteClient[index].classList.remove('notOnLine');
+        //             //     // this.btnDeleteClient[index].classList.add('onLine');
+        //             //     this.btnDeleteClient[id].classList.toggle('onLine');
+        //             // }
+        //             // else {
+        //             //     this.btnDeleteClient[id].classList.toggle('notOnLine');
+        //             //     // this.btnDeleteClient[index].classList.add('notOnLine');
+        //             //     // this.btnDeleteClient[index].classList.remove('onLine');
+        //             // }
+        //         })
+        //     }
+        // })
+        // // this.btnDeleteClient[index].classList.remove('notOnLine');
+        // this.btnDeleteClient[index].classList.add('onLine');
         
     }
     openMessage = (event,id, index) => {
@@ -235,6 +244,7 @@ export default class Admin extends Component {
                         <GetClients
                             key={client._id}
                             btn={this.btn}
+                            btnDeleteClient={this.btnDeleteClient}
                             index={index}
                             deleteUser={this.deleteUser}
                             client={client} />
@@ -248,7 +258,7 @@ export default class Admin extends Component {
                         getUsers={this.getUsers}
                         validateHouse={this.validateHouse}
                         checkHouse={this.checkHouse}
-                        btn={this.btn}
+                        btnDeleteClient={this.btnDeleteClient}
                         index={index}
                         deleteUser={this.deleteUser}
                         key={advertiser._id}
