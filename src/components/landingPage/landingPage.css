@@ -42,7 +42,7 @@
         width: 15rem;
     }
     .landin-page-sections {
-        width: 45rem;
+        width: 48rem;
         display: flex;
         justify-content: space-between;
         padding: 1rem;
@@ -52,7 +52,7 @@
     .landin-page-houses {
        display: flex;
        flex-wrap: wrap;
-       width: 40rem;
+       width: 45rem;
        margin: auto;
        /* justify-content: center; */
     }
@@ -69,7 +69,7 @@
     .landin-page-sections {
         display: flex;
         justify-content: space-between;
-        width: 65rem;
+        width: 67rem;
         margin: 3rem auto;
         padding: 1rem;
         box-shadow: 0 5px 8px 0 grey;
@@ -77,11 +77,31 @@
     .landin-page-houses {
        display: flex;
        flex-wrap: wrap;
-       width: 60rem;
+       width: 65rem;
        margin: auto;
        /* justify-content: center; */
     }
     
+}
+
+@media screen and (min-width : 1500px){
+
+     .landin-page-sections {
+        display: flex;
+        justify-content: space-between;
+        width: 85rem;
+        margin: 3rem auto;
+        padding: 1rem;
+        box-shadow: 0 5px 8px 0 grey;
+    }
+    .landin-page-houses {
+       display: flex;
+       flex-wrap: wrap;
+       width: 70rem;
+       margin: auto;
+       /* justify-content: center; */
+    }
+
 }
 
 

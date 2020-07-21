@@ -129,6 +129,14 @@
     height: 1rem;
 }
 
+.separated-bottom {
+    display: block;
+    border-bottom: 1px solid #364d79;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    width: 100%;
+}
+
 @media screen and (min-width: 800px){
     .ant-carousel .slick-slide {
         text-align: center;
