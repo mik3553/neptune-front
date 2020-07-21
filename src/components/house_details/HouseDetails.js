@@ -128,13 +128,12 @@ export default class HouseDetails extends Component {
                                             </span>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div className='separated-bottom'>
                                         <p>nombre de chambes: {details.nbrOfRooms}</p>
                                         <p>nombre de lits: {details.nbrOfBeds}</p>
-                                        {/* <span>Note : {details.rating}/5</span> */}
                                         
                                     </div>
-                                    <div>
+                                    <div className='separated-bottom'>
                                         <p>Services :</p>
                                         <ul>
                                             {/* {services} */}
@@ -144,8 +143,8 @@ export default class HouseDetails extends Component {
                                             {services[3] !== 'undefined' ? <li>Wi-fi/Internet</li> : null}
                                             {services[4] !== 'undefined' ? <li>Piscine</li> : null}
                                         </ul>
-                                        <span>Prix par personne: {details.price} euros</span>
                                     </div>
+                                    <span className='separated-bottom'>Prix par personne: {details.price} euros</span>
                                 </div>
                             </figure>
                             <article>

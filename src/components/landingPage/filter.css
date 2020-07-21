@@ -11,7 +11,7 @@
     padding-right: 0;
     position: fixed;
     left: -10.7rem;
-    top: 10.5rem;
+    top: 17rem;
     border-bottom-right-radius: 1rem;
     border-top-right-radius: 1rem;
     display: flex;
@@ -38,7 +38,7 @@
 .showFilter:focus {
     color: #00d4ff;
 }
-@media screen and (min-width: 800px){
+@media screen and (min-width: 1100px){
 
     .landin-page-filter fieldset {
        
@@ -52,7 +52,7 @@
         background-color: rgba(1, 1, 65, 0.89);
         position: sticky;
         /* left: 0; */
-        top: 0;
+        top: 5rem;
         /* border-bottom-right-radius: 0;
         border-top-right-radius: 0; */
         display: flex;

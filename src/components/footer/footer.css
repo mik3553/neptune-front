@@ -38,6 +38,7 @@
     margin: 0.5rem;
 }
 
+
 .list {
     background: -webkit-linear-gradient(90deg, rgba(255,255,255,1) 0%, #00d4ff 100%);
     background-clip: text;
@@ -61,13 +62,12 @@
         justify-content: space-evenly;
     }
     .footer article {
-     margin: auto 2rem;
+     margin: 1rem 2rem;
      width: 20rem;
     }
     footer h4 {
         width: 10rem;
         text-align: center;
         margin: auto;
-    }
- 
+    } 
 }
