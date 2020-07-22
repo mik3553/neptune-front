@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
+import { Button } from 'antd';
 
 export default class HouseToModify extends Component {
     constructor(props) {
@@ -111,7 +112,7 @@ export default class HouseToModify extends Component {
                         <span>price : </span>
                         <input onChange={this.handleChange} type='number' name='price' value={this.state.price} />
                     </fieldset>
-                    <fieldset>
+                    <fieldset className='checkboxesM'>
                         <span>Services : </span>
                         <label>Repas</label>
                         <input onClick={this.handleChecked} type='checkbox' name='breakfast' defaultChecked={this.state.breakfast !== 'undefined' ? true : false } value={this.state.breakfast} />
@@ -125,12 +126,13 @@ export default class HouseToModify extends Component {
                         <input onClick={this.handleChecked} type='checkbox' name='swimingPool' defaultChecked={this.state.swimingPool !== 'undefined' ? true : false } value={this.state.swimingPool} />
                     </fieldset>
 
+
                     {/* <fieldset>
                             <span>images : </span>
                             <input onChange={this.handleChange} type='file' name='images' id='images'  multiple  />
                         </fieldset> */}
 
-                    <button type='submit'>Envoyer</button>
+                    <Button className='button' htmlType='submit' type="primary" size={'middle'}>valider</Button>
                 </form>
             </div>
         )

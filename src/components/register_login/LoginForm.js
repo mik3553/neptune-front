@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { Button } from 'antd';
 
 class LoginForm extends Component {
 
@@ -88,7 +89,7 @@ class LoginForm extends Component {
                         value={this.state.password} 
                         onChange={this.handleChange} />
                 </div>
-                <input type='submit' />
+                <Button className='button' htmlType='submit' type="primary" size={'middle'}>valider</Button>
                 <span className='error'>{this.state.errorSubmit}</span>
             </form>
         )

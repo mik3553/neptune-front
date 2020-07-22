@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Alert } from 'antd';
+import { Button } from 'antd';
+
 
 export default class RegisterForm extends Component {
     constructor(props) {
@@ -158,7 +160,7 @@ export default class RegisterForm extends Component {
                         value={this.state.passwordC}
                         onChange={this.handleChange} />
                 </div>
-                <input type='submit' />
+                <Button className='button' htmlType='submit' type="primary" size={'middle'}>valider</Button>
                 {alert}
                 <ol>
                     {nameError}

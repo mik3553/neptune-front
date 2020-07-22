@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import HouseToModify from './HouseToModify';
+import { Button } from 'antd';
 
 export default class PersonalInformations extends Component {
 
@@ -81,11 +82,14 @@ export default class PersonalInformations extends Component {
                     <h3><span>Photos</span></h3>
                     <div className='houseInformations-images'>{images}</div>
                 </div>
-                <button
+
+
+                <Button onClick={this.handleShow}> className='button' htmlType='submit' type="primary" size={'middle'}>Modifier</Button>
+                {/* <button
                     className='button-modify'
                     onClick={this.handleShow}>
                     Modifier
-                </button>
+                </button> */}
                 {houseToModify}
             </article>
         )

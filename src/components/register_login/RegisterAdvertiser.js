@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import {Alert} from 'antd';
+import { Button } from 'antd';
+
 
 import './loginPage.css'
 
@@ -374,7 +376,7 @@ export default class RegisterForm extends Component {
                                     onClick={this.checkBoxes}
                                 />
                             </div>
-                            <input type='submit' />
+                            <Button className='button' htmlType='submit' type="primary" size={'middle'}>valider</Button>
                             {alert}
                             <span className='error'>{this.state.errorSubmit}</span>
                             <ul>
