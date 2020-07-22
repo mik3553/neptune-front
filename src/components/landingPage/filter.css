@@ -1,7 +1,14 @@
+.filtre label, .filtre input {
+    /* width: 1rem; */
+    margin: 0;
+    display: inline-block;
+}
 .landin-page-filter fieldset {
     margin: 1rem;
-    display: flex;
     color: white;
+    display: flex ;
+    justify-content: space-between;
+    flex-direction: row;
 }
 .landin-page-filter {
     z-index: 6;
@@ -20,6 +27,11 @@
     transition: left 0.5s;
 }
 
+
+.filtre {
+    width: 15rem;
+}
+
 .open-filter {
     left: 0;
 }
@@ -35,7 +47,7 @@
     text-orientation: upright;
     font-style: italic;
 }
-.showFilter:focus {
+.showFilter:hover, .showFilter:focus {
     color: #00d4ff;
 }
 @media screen and (min-width: 1100px){

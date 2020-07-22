@@ -50,11 +50,10 @@ export default class Filter extends Component {
                 ref={this.wrapperFilterRef}
                 className='landin-page-filter'
             >
-                <div>
-                    <h3>Filtre</h3>
+                <div className='filtre'>
                     <form 
                         onSubmit={(event) => this.props.filter(event, this.state.breakfast, this.state.landry, this.state.animals, this.state.wi_fi, this.state.swimingPool )}
-                        className='filtre'>
+                        >
                         <fieldset>
                             <label>Restauration</label>
                             <input

@@ -23,9 +23,6 @@
     margin-bottom: 0.5rem;
     border-radius: 2rem;
 }
-.landin-page fieldset label, .landin-pagefieldset input {
-    width: 1rem;
-}
 
 .landin-page-sections {
     margin: 3rem 0 3rem 0;
