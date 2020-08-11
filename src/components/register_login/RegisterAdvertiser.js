@@ -25,11 +25,11 @@ export default class RegisterForm extends Component {
             nbrOfBeds:'',
             price:'',
             images:'',
-            // breakfast: undefined,
-            // landry: undefined,
-            // animals: undefined,
-            // swimingPool: undefined,
-            // wi_fi: undefined,
+            breakfast: 'undefined',
+            landry: 'undefined',
+            animals: 'undefined',
+            swimingPool: 'undefined',
+            wi_fi: 'undefined',
             nameError : false,
             passwordError : false,
             emailError: false,
@@ -43,55 +43,66 @@ export default class RegisterForm extends Component {
         const { value, name } = event.target
         this.setState({ [name]: value })
     }
-    handleSubmit = (event) => {
+     handleSubmit = (event) => {
         event.preventDefault() 
-        const { title, adress, zipcode, region, nbrOfRooms, nbrOfBeds, price, images} = this.state
-        if (this.nameError(this.state.firstName, this.state.lastName) && this.checkEmail(this.state.email) && this.checkPassword(this.state.password) && this.state.password === this.state.passwordC && this.checkHouseInformations(title, adress, zipcode, region, nbrOfRooms, nbrOfBeds, price, images) ) {
-            const inputFile = document.getElementById('images').files
-            for (let i = 0; i < inputFile.length; i++) {
-                this.formData.append('images', inputFile[i])
+        if(window.fetch){
+            const { title, adress, zipcode, region, nbrOfRooms, nbrOfBeds, price, images } = this.state
+            if (this.nameError(this.state.firstName, this.state.lastName) && this.checkEmail(this.state.email) && this.checkPassword(this.state.password) && this.state.password === this.state.passwordC && this.checkHouseInformations(title, adress, zipcode, region, nbrOfRooms, nbrOfBeds, price, images)) {
+                const inputFile = document.getElementById('images').files
+                for (let i = 0; i < inputFile.length; i++) {
+                    this.formData.append('images', inputFile[i])
+                }
+                this.formData.append('title', this.state.title)
+                this.formData.append('firstName', this.state.firstName)
+                this.formData.append('lastName', this.state.lastName)
+                this.formData.append('email', this.state.email)
+                this.formData.append('description', this.state.description)
+                this.formData.append('adress', this.state.adress)
+                this.formData.append('zipcode', this.state.zipcode)
+                this.formData.append('password', this.state.password)
+                this.formData.append('region', this.state.region)
+                this.formData.append('nbrOfRooms', this.state.nbrOfRooms)
+                this.formData.append('nbrOfBeds', this.state.nbrOfBeds)
+                this.formData.append('price', this.state.price)
+                this.formData.append('breakfast', this.state.breakfast)
+                this.formData.append('landry', this.state.landry)
+                this.formData.append('wi_fi', this.state.wi_fi)
+                this.formData.append('animals', this.state.animals)
+                this.formData.append('swimingPool', this.state.swimingPool)
+                let options = {
+                    method: 'POST',
+                    body: this.formData
+                }
+                fetch('https://neptune-back.abdelkrim-sahraoui.com/registerAdvertiser', options)
+                    .then(response => {
+                        // let { firstName,lastName,email,password,title,passwordC,description,adress,zipcode,region,nbrOfRooms,nbrOfBeds,price ,images,errorSubmit } = this.state
+                        if (response.status === 201) {
+                            response.json()
+                                .then(response => {
+                                    console.log(response)
+                                    let resetForm = this.state
+                                    Object.keys(resetForm)
+                                        .forEach(item => {
+                                            resetForm[item] = ''
+                                        })
+                                    this.setState({ ...resetForm, alert: true })
+                                })
+                        }
+                        else if (response.status === 204) {
+                            this.setState({ errorSubmit: 'email déja utilisé !' })
+                        }
+                        else {
+                            response.json()
+                                .then(response => {
+                                    console.log(response)
+                                })
+                        }
+                    })
+            } else {
+                console.log('fetch not allowed')
             }
-            this.formData.append('title', this.state.title)
-            this.formData.append('firstName', this.state.firstName)
-            this.formData.append('lastName', this.state.lastName)
-            this.formData.append('email', this.state.email)
-            this.formData.append('description', this.state.description)
-            this.formData.append('adress', this.state.adress)
-            this.formData.append('zipcode', this.state.zipcode)
-            this.formData.append('password', this.state.password)
-            this.formData.append('region', this.state.region)
-            this.formData.append('nbrOfRooms', this.state.nbrOfRooms)
-            this.formData.append('nbrOfBeds', this.state.nbrOfBeds)
-            this.formData.append('price', this.state.price)
-            this.formData.append('breakfast', this.state.breakfast)
-            this.formData.append('landry', this.state.landry)
-            this.formData.append('wi_fi', this.state.wi_fi)
-            this.formData.append('animals', this.state.animals)
-            this.formData.append('swimingPool', this.state.swimingPool)
-            let options = {
-                method: 'POST',
-                body: this.formData
-            }
-            fetch('https://neptune-back.abdelkrim-sahraoui.com/registerAdvertiser', options)
-                .then(response => {
-                    if (response.status === 201) {
-                        response.json()
-                            .then(response => {
-                                console.log(response)
-                                this.setState({ alert : true })
-                            })
-                    }
-                    else if (response.status === 204) {
-                        this.setState({ errorSubmit: 'email déja utilisé !' })
-                    }
-                    else {
-                        response.json()
-                            .then(response => {
-                                console.log(response)
-                            })
-                    }
-                })
         }
+       
     }
     checkBoxes = (event)=>{
         const {name, checked} = event.target
@@ -101,7 +112,7 @@ export default class RegisterForm extends Component {
             this.setState({[name]: name})
         }
         else {
-            this.setState({[name]: undefined })
+            this.setState({[name]: 'undefined' })
         }
     }
     checkEmail = (email) => {

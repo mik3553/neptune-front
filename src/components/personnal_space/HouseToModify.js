@@ -47,7 +47,7 @@ export default class HouseToModify extends Component {
         }
     }
     handleSubmit = (event) => {
-        event.preventDefault();
+       // event.preventDefault();
         let options = {
             method: 'PUT',
             body: new URLSearchParams(this.state),
@@ -112,16 +112,25 @@ export default class HouseToModify extends Component {
                         <span>price : </span>
                         <input onChange={this.handleChange} type='number' name='price' value={this.state.price} />
                     </fieldset>
-                    <fieldset className='checkboxesM'>
-                        <span>Services : </span>
+                      {/* className='checkboxesM' */}
+                    <span>Services : </span>
+                    <fieldset >
                         <label>Repas</label>
                         <input onClick={this.handleChecked} type='checkbox' name='breakfast' defaultChecked={this.state.breakfast !== 'undefined' ? true : false } value={this.state.breakfast} />
+                    </fieldset>
+                    <fieldset>
                         <label>Blanchisserie</label>
                         <input onClick={this.handleChecked} type='checkbox' name='landry' defaultChecked={this.state.landry !== 'undefined' ? true : false } value={this.state.landry} />
+                    </fieldset>
+                    <fieldset>
                         <label>Animaux</label>
                         <input onClick={this.handleChecked} type='checkbox' name='animals' defaultChecked={this.state.animals !== 'undefined' ? true : false } value={this.state.animals} />
+                    </fieldset>
+                    <fieldset>
                         <label>Wi_fi</label>
                         <input onClick={this.handleChecked} type='checkbox' name='wi_fi' defaultChecked={this.state.wi_fi !== 'undefined' ? true : false } value={this.state.wi_fi} />
+                    </fieldset>
+                    <fieldset>
                         <label>Piscine</label>
                         <input onClick={this.handleChecked} type='checkbox' name='swimingPool' defaultChecked={this.state.swimingPool !== 'undefined' ? true : false } value={this.state.swimingPool} />
                     </fieldset>

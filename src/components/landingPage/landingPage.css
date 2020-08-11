@@ -14,7 +14,6 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    /* box-shadow: ; */
 }
 .select {
     margin-bottom: 2rem;

@@ -114,9 +114,9 @@ td:last-of-type {
     margin: 1rem auto;
 } */
 
-.checkboxesM label, .checkboxesM input {
+/* .checkboxesM label, .checkboxesM input {
     display: block;
-}
+} */
 
 
 @media screen and (min-width: 800px){

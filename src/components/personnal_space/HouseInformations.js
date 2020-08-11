@@ -84,7 +84,7 @@ export default class PersonalInformations extends Component {
                 </div>
 
 
-                <Button onClick={this.handleShow}> className='button' htmlType='submit' type="primary" size={'middle'}>Modifier</Button>
+                 <Button onClick={this.handleShow}  className='button' htmlType='submit' type="primary" size={'middle'}>Modifier</Button>
                 {/* <button
                     className='button-modify'
                     onClick={this.handleShow}>
